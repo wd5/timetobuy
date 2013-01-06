@@ -58,9 +58,9 @@
         <h2 class="trigger"><a href="#">Механизм</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
-                <a href="#">Кварцевые</a>
-                <a href="#">Металические</a>
-                <a href="#">Стальной ремешок</a>
+                {% for feature in products %}
+                    <a href="#">{{ feature.clock.get_mechanism_display }}</a>
+                {% endfor %}
             </div>
         </div>
 

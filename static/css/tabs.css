@@ -1,0 +1,67 @@
+.tabs {
+	width:100%;
+	overflow:hidden;
+	font-size:0.9em;
+	margin:2em 0;
+	zoom:1;
+	padding:1px;
+	position:relative;
+}
+
+.tabs dt {
+	font-weight: bold;
+	float:left;
+	height: 23px;
+	line-height:22px;
+	color: #FFF;
+	background: url('../img/harBg.jpg');
+	border-bottom:0;
+	padding:0 1em;
+	position:relative;
+	left:3px;
+	margin-right:1px;
+	cursor:pointer;
+	
+	-webkit-border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topleft:3px;
+	-moz-border-radius-topright:3px;
+}
+
+.tabs dt:hover {
+	filter:alpha(opacity=75);
+    -moz-opacity: 0.75;
+    -khtml-opacity: 0.75;
+    opacity: 0.75;
+}
+
+.tabs dt.selected {
+	color: #000;
+	border-color:#808080;
+	background: url('../img/harAcBg.jpg');
+	z-index:3;
+	cursor:auto;
+}
+
+.tabs dd {
+	background:#fff;
+	display:none;
+	float:right;
+	width:100%;
+	margin:23px 0 0 -100%;
+	position:relative;
+	z-index:2;
+}
+
+.tabs dd.selected {
+	display:block;
+}
+
+.tabs .tab-content {
+	float: left;
+	background: #e6e6e6;
+	padding:20px;
+	
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+}

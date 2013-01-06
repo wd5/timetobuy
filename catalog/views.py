@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from catalog.models import Section, Product, BrandsCategory
+from catalog.models import Section, Product, Clock, BrandsCategory
+from catalog.clock_features import *
 import re
 from django.db.models.query_utils import Q
 from django.shortcuts import get_object_or_404, render_to_response, render
