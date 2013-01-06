@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="content fullBlock left">
+<div class="leftCol">
+    <div id="container" class="opacityBlock">
+        <h2 class="trigger active"><a href="#">Бренды часов</a></h2>
+        <div class="toggle_container">
+
+            <a href="#" class="linkAlf">По алфавиту</a><br>
+
+            <div class="block">
+                <ul class="countryMenu noList">
+                    <li>
+                        <a href="#"><img src="img/flag-sh.jpg">Швейцарские часы</a>
+                        <ul>
+                            <li><a href="#">Adriatica</a></li>
+                            <li><a href="#">Alfex</a></li>
+                            <li>
+                                <a href="#">Continental</a>
+                                <b>Коллеции:</b>
+                                <ul>
+                                    <li><a href="#">Strap</a></li>
+                                    <li><a href="#">Titanium</a></li>
+                                    <li><a href="#">Strap</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Candino</a></li>
+                            <li><a href="#">Titanium</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="countryMenu noList">
+                    <li>
+                        <a href="#"><img src="img/flag-jp.jpg">Японские часы</a>
+                        <ul>
+                            <li><a href="#">Adriatica</a></li>
+                            <li><a href="#">Alfex</a></li>
+                            <li>
+                                <a href="#">Continental</a>
+                                <b>Коллеции:</b>
+                                <ul>
+                                    <li><a href="#">Strap</a></li>
+                                    <li><a href="#">Titanium</a></li>
+                                    <li><a href="#">Strap</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Candino</a></li>
+                            <li><a href="#">Titanium</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Активные фильтры</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                <a href="#"><s>Кварцевые</s></a>
+                <a href="#"><s>Металические</s></a>
+                <a href="#"><s>Стальной ремешок</s></a>
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Фильтр цены</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+
+                <div id="options" class="txt11">
+                    <form>
+                        <label for="price">От:
+                            <input type="text" name="price" id="price">
+                        </label>
+
+                        <label for="price2">до:
+                            <input type="text" name="price2" id="price2">
+                            руб.
+                        </label>
+                    </form>
+                    <div id="slider_price" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 100%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
+                </div>
+
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Механизм</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                <a href="#">Кварцевые</a>
+                <a href="#">Металические</a>
+                <a href="#">Стальной ремешок</a>
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Циферблат</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                <a href="#">Кварцевые</a>
+                <a href="#">Металические</a>
+                <a href="#">Стальной ремешок</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="rightCol">
+<div class="itemName txt12 grey noDecoration opacityBlock">
+    <h1 class="left black">{{ section.name }}</h1>
+</div>
+
+<div class="sortAndPag txt11 opacityBlock">
+    <div class="pagPage">
+        <a href="#">Показать все</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">Дальше</a>
+    </div>
+</div>
+
+<div class="itemList txt11">
+    {% for product in products %}
+        <div class="itemCard">
+        <span class="itemAdd"><a href="#"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
+        <a class="itemLink" href="#">
+            <img src="/{{ product.thumbnail_image.thumb_url}}" width="150">
+            <span class="catBrands black">CASIO</span>
+            <span class="catName grey">{{ product.category.all.0.section.name }} {{ product.name }}</span>
+            <span class="catPrice blue">{{ product.price }} руб.</span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="sortAndPag txt11 opacityBlock">
+    <div class="pagPage">
+        <a href="#">Показать все</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">Дальше</a>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

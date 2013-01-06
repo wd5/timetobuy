@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load catalog_filters %}
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>TIME TO BUY</title>
+    <meta property="og:image" content="{{ STATIC_URL }}img/logo.jpg" />
+    <link rel="image_src" href="{{ STATIC_URL }}img/logo.jpg" />
+    <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" media="all" />
+    <link href="{{ STATIC_URL }}css/list.css" rel="stylesheet" media="all" />
+    <link href="{{ STATIC_URL }}css/block.css" rel="stylesheet" media="all" />
+    <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet" >
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/catalog.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/price.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <div class="header fullBlock">
+        <a href="#" class="logo opacity lightGrey">интернет-магазин часов</a>
+
+        <div class="phone txt11">
+            <div class="workHours grey">с 10:00 до 20:00&ensp;|&ensp; </div>
+            <div class="phoneLink"><a class="left noDecoration black opacity" href="#">Обратный звонок</a></div>
+            <div class="number left">8 <span class="blue">(499)</span> <!--noskype></noskype-->662-87-99</div>
+        </div>
+
+        <div class="cart right opacityBlock">
+            <a class="noDecoration blue txt11" href="#">
+                <span class="cartPic white">12</span>
+                <span class="cartTxt"><b class=" txt10">Корзина: </b>55&thinsp;000&thinsp;руб.</span>
+            </a>
+        </div>
+
+        <div class="help right txt10 opacityBlock black noDecoration">
+            <a class="blue" href="#"><b>Войти</b></a>
+            &ensp;|&ensp;
+            <a href="">Заказ</a>
+            &ensp;|&ensp;
+            <a href="">Оплата</a>
+            &ensp;|&ensp;
+            <a href="">Доставка</a>
+            &ensp;|&ensp;
+            <a href="">Гарантия</a>
+            &ensp;|&ensp;
+            <a href="">Контакты</a>
+        </div>
+    </div>
+    <div class="menu fullBlock">
+        <span class="menuLeft"><img src="{{ STATIC_URL }}img/menuLeft.jpg"></span>
+        <span class="menuRight"><img src="{{ STATIC_URL }}img/menuRight.jpg"></span>
+        <ul class="mainMenu noList txt11 white noDecoration opacityBlock">
+            <li class="menuHome"><a href="#"><img src="{{ STATIC_URL }}img/menuHome.jpg"></a></li>
+            {% menu request %}
+        </ul>
+        <div class="search lightGrey right">
+            <form action="#" class="searchForm">
+                <input id="search" type="text" name="filter_name" value="Найти часы..." onclick="this.value = '';" onkeydown="this.style.color = '#000000';">
+                <input id="button" type="image" src="{{ STATIC_URL }}img/search.jpg">
+            </form>
+        </div>
+    </div>
+{% block main %}
+{% endblock %}
+<div class="footer fullBlock txt11 opacityBlock clear">
+    <ul class="noList">
+        <span class="blue upper">информация</span>
+        <li><a class="white" href="#">О компании</a></li>
+        <li><a class="white" href="#">Контактная информаця</a></li>
+        <li><a class="white" href="#">Пользовательское соглашение</a></li>
+    </ul>
+
+    <ul class="noList">
+        <span class="blue upper">Поддержка</span>
+        <li><a class="white" href="#">Способы оплаты</a></li>
+        <li><a class="white" href="#">Варианты доставки</a></li>
+        <li><a class="white" href="#">Гарантии на товар</a></li>
+    </ul>
+
+    <ul class="noList">
+        <span class="blue upper">ДОПОЛНИТЕЛЬНО</span>
+        <li><a class="white" href="#">Регулировка браслета</a></li>
+        <li><a class="white" href="#">21 день на возврат</a></li>
+    </ul>
+
+    <ul class="noList last">
+        <span class="blue upper">Следуйте за нами</span>
+        <li><a class="white" href="#"><img src="{{ STATIC_URL }}img/vk.png"></a>&ensp; <a class="white" href="#"><img src="{{ STATIC_URL }}img/fc.png"></a></li>
+    </ul>
+</div>
+</div>
+</body>
+</html>
