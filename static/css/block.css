@@ -1,0 +1,90 @@
+#container {
+	float: left;
+	width: 150px;
+	margin: 0 auto;
+	border-bottom: 1px solid #ccc;
+	font-size: 11px;
+}
+
+h2.trigger {
+	height: 20px;
+	background: url("../img/specArrow.jpg") no-repeat 0 19px; 
+	width: 135px;
+	margin: 0;
+	padding: 15px 0 10px 15px;
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #000;
+	border-top: 1px solid #ccc;
+}
+
+h2.trigger  a {
+	color: #000;
+	text-decoration: none;
+	display: block;
+}
+
+h2.active {
+	background: url("../img/specArrowUp.jpg") no-repeat 0 19px; 
+}
+
+.toggle_container {
+	width: 150px;
+	clear: both;
+	overflow: hidden;
+}
+
+.block {
+	padding-bottom: 15px;
+}
+
+.block a {
+	display: block;
+	padding: 3px 0 3px 0;
+}
+
+
+.countryMenu {
+	margin-bottom: 10px;
+	}
+
+.countryMenu a {
+	text-decoration: none;
+	color: #000;
+}
+
+.countryMenu img {
+	padding-right: 5px;
+	position: relative;
+	top: 3px;
+}
+
+.countryMenu b {
+	margin: 5px 0 5px 0;
+	display: block;}
+
+.countryMenu li a {
+	margin-bottom: 5px;}
+
+.countryMenu ul {
+	padding: 0px;
+}
+
+.countryMenu ul li {
+	margin: 0 0 0 8px;
+}
+
+.countryMenu ul li a {
+	display: block;
+	margin: 0;
+	padding: 3px 0 5px 5px;
+	border-left: 1px dashed #000;
+}
+
+.countryMenu ul li ul {
+	margin-bottom: 5px;
+}
+
+.countryMenu ul li ul li {
+	margin-left: 10px;
+}
