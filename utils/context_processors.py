@@ -1,4 +1,6 @@
-def my_global_vars(request):
+from catalog.clock_features import *
+
+def clock_features():
     return {
-        'site_title': u"Мой сайт",
+        'mechanism': MECHANISM_CHOICES,
         }
