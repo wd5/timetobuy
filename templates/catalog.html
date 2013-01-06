@@ -5,50 +5,22 @@
     <div id="container" class="opacityBlock">
         <h2 class="trigger active"><a href="#">Бренды часов</a></h2>
         <div class="toggle_container">
-
-            <a href="#" class="linkAlf">По алфавиту</a><br>
-
             <div class="block">
                 <ul class="countryMenu noList">
-                    <li>
-                        <a href="#"><img src="img/flag-sh.jpg">Швейцарские часы</a>
-                        <ul>
-                            <li><a href="#">Adriatica</a></li>
-                            <li><a href="#">Alfex</a></li>
+                    {% for cat in brands_cat %}
+                        {% if cat.id in products_cat %}
                             <li>
-                                <a href="#">Continental</a>
-                                <b>Коллеции:</b>
+                                <a href="#"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
                                 <ul>
-                                    <li><a href="#">Strap</a></li>
-                                    <li><a href="#">Titanium</a></li>
-                                    <li><a href="#">Strap</a></li>
+                                    {% for brand in cat.brand_set.all %}
+                                        {% if brand.id in products_brand %}
+                                            <li><a href="{{ brand }}">{{ brand.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
                                 </ul>
                             </li>
-                            <li><a href="#">Candino</a></li>
-                            <li><a href="#">Titanium</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <ul class="countryMenu noList">
-                    <li>
-                        <a href="#"><img src="img/flag-jp.jpg">Японские часы</a>
-                        <ul>
-                            <li><a href="#">Adriatica</a></li>
-                            <li><a href="#">Alfex</a></li>
-                            <li>
-                                <a href="#">Continental</a>
-                                <b>Коллеции:</b>
-                                <ul>
-                                    <li><a href="#">Strap</a></li>
-                                    <li><a href="#">Titanium</a></li>
-                                    <li><a href="#">Strap</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Candino</a></li>
-                            <li><a href="#">Titanium</a></li>
-                        </ul>
-                    </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -126,7 +98,7 @@
         <span class="itemAdd"><a href="#"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
         <a class="itemLink" href="#">
             <img src="/{{ product.thumbnail_image.thumb_url}}" width="150">
-            <span class="catBrands black">CASIO</span>
+            <span class="catBrands black">{{ product.brand }}</span>
             <span class="catName grey">{{ product.category.all.0.section.name }} {{ product.name }}</span>
             <span class="catPrice blue">{{ product.price }} руб.</span>
         </a>

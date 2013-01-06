@@ -34,3 +34,18 @@ class CategoriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('name',)}
 
 admin.site.register(Category, CategoriesAdmin)
+
+class BrandsAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    prepopulated_fields = {'slug' : ('name',)}
+
+admin.site.register(Brand, BrandsAdmin)
+admin.site.register(Collection)
+
+class BrandsCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
+    prepopulated_fields = {'slug' : ('name',)}
+
+admin.site.register(BrandsCategory, BrandsCategoryAdmin)
