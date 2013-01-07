@@ -2,7 +2,7 @@ $(function() {
 	$('#price').change(function () {
 	var val = $(this).val();
 	$('#slider_price').slider("values",0,val);
-	});	
+	});
 	
 	$('#price2').change( function() {
 		var val2 = $(this).val();
@@ -13,9 +13,9 @@ $(function() {
 		range: true,
 		//orientation: "vertical",
 		min: 0,
-		step:100,
-		max: 83000,
-		values: [ 0, 83000 ],
+		step: 100,
+		max: 100000,
+		values: [ 0, 100000 ],
 		slide: function( event, ui ) {
 			//$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 			$('#price').val(ui.values[0]);

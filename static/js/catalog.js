@@ -33,11 +33,16 @@ $(document).ready(function() {
     	return false;
     });
 
-    $('.toggle_container a').on('click', function(e) {
+    $('.filter_link').on('click', function(e) {
         e.preventDefault();
         var data = $(this).data();
         var newURL = updateURLParameter(window.location.href, data.filterName, data.filterValue);
         window.location = newURL;
     });
 
+    $('#price-form').on('submit', function(e) {
+        e.preventDefault();
+        var newURL = updateURLParameter(window.location.href, 'price-range', $('#price').val() + ':' + $('#price2').val());
+        window.location = newURL;
+    })
 });

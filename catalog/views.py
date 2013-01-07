@@ -9,13 +9,20 @@ def section(request, section_slug):
     params = request.GET.dict()
 
     section = Section.objects.get(slug=section_slug)
+    chosen_params = []
+    price_range = False
+    if params.has_key('price-range'):
+        price_range = params['price-range']
+        params.pop('price-range')
     if params.has_key('brandscat'):
         brands_cat_filter = params['brandscat']
+        chosen_params.append(['brandscat', u'Бренд', BrandsCategory.objects.get(id=brands_cat_filter).name])
         params.pop('brandscat')
         clocks = Clock.objects.filter(category__section=section).filter(**params).filter(brand__category_id=brands_cat_filter)
     else:
         clocks = Clock.objects.filter(category__section=section).filter(**params)
-    chosen_params = []
+    if price_range:
+        clocks = clocks.filter(price__range=(int(price_range.split(':')[0]), int(price_range.split(':')[1])))
     for param in params:
         new_p = [param,]
         filter_name = clocks[0]._meta.get_field_by_name(param)[0].verbose_name
@@ -23,6 +30,7 @@ def section(request, section_slug):
         value = clocks[0].__getattribute__(param)
         if param == 'brand':
             new_p.append(value)
+            brand_is_filter = True
         else:
             for item in clocks[0]._meta.get_field_by_name(param)[0].choices:
                 if item[0] == value:

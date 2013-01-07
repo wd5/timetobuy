@@ -11,7 +11,7 @@
                 <div class="block blue opacityBlock acticveFilter">
                     {% for param in chosen_params %}
                     <b class="black">{{ param.1 }}:</b><br>
-                    <a href="#" class="active_link" data-filter-name="{{ param.0 }}" data-filter-value="delete">{{ param.2 }}</a>
+                    <a class="filter_link" href="#" class="active_link" data-filter-name="{{ param.0 }}" data-filter-value="delete">{{ param.2 }}</a>
                     <br>
                     {% endfor %}
                 </div>
@@ -19,17 +19,18 @@
         </div>
     {% endif %}
 
+    {% if not brand_is_filter %}
     <h2 class="trigger active"><a href="#">Бренды часов</a></h2>
         <div class="toggle_container">
             <div class="block">
                 <ul class="countryMenu noList">
                     {% for cat in brands_cat %}
                         <li>
-                            <a href="#" data-filter-name="brandscat" data-filter-value="{{ cat.id }}"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
+                            <a class="filter_link" href="#" data-filter-name="brandscat" data-filter-value="{{ cat.id }}"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
                             <ul>
                                 {% for brand in cat.brand_set.all %}
                                     {% if brand.id in brands %}
-                                        <li><a href="#" data-filter-name="brand" data-filter-value="{{ brand.id }}">{{ brand.name }}</a></li>
+                                        <li><a class="filter_link" href="#" data-filter-name="brand" data-filter-value="{{ brand.id }}">{{ brand.name }}</a></li>
                                     {% endif %}
                                 {% endfor %}
                             </ul>
@@ -38,23 +39,27 @@
                 </ul>
             </div>
         </div>
+    {% endif %}
 
         <h2 class="trigger"><a href="#">Фильтр цены</a></h2>
-        <div class="toggle_container" style="display: none;">
+        <div class="toggle_container">
             <div class="block blue opacityBlock">
 
                 <div id="options" class="txt11">
-                    <form>
+                    <form id="price-form">
                         <label for="price">От:
-                            <input type="text" name="price" id="price">
+                            <input type="text" name="price" id="price" data-min-price="{{ min_price }}">
                         </label>
 
-                        <label for="price2">до:
-                            <input type="text" name="price2" id="price2">
+                        <label for="price2">До:
+                            <input type="text" name="price2" id="price2" data-max-price="{{ max_price }}">
                             руб.
                         </label>
+                        <div id="slider_price"></div>
+
+                        <input class='opacity' id='button' type="image" src='{{ STATIC_URL }}img/filterPrice.jpg'/>
+
                     </form>
-                    <div id="slider_price" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 100%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div>
                 </div>
 
             </div>
@@ -65,7 +70,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in genders %}
-                    <a href="#" data-filter-name="gender" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="gender" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -76,7 +81,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in mechanisms %}
-                    <a href="#" data-filter-name="mechanism" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="mechanism" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -87,7 +92,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in bodys %}
-                    <a href="#" data-filter-name="body" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="body" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -98,7 +103,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in bracelets %}
-                    <a href="#" data-filter-name="bracelet" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="bracelet" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -109,7 +114,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in bracelet_lengths %}
-                    <a href="#" data-filter-name="bracelet_length" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="bracelet_length" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -120,7 +125,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in windows %}
-                    <a href="#" data-filter-name="window" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="window" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -131,7 +136,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in waterproofs %}
-                    <a href="#" data-filter-name="waterproof" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="waterproof" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -142,7 +147,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in colors %}
-                    <a href="#" data-filter-name="color" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="color" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -153,7 +158,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in time_indications %}
-                    <a href="#" data-filter-name="time_indication" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="time_indication" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -164,7 +169,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in dial_colors %}
-                    <a href="#" data-filter-name="dial_color" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="dial_color" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -175,7 +180,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in calendars %}
-                    <a href="#" data-filter-name="calendar" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="calendar" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -186,7 +191,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in chronographs %}
-                    <a href="#" data-filter-name="chronograph" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="chronograph" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -197,7 +202,7 @@
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
                 {% for feature in type_of_locks %}
-                    <a href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>

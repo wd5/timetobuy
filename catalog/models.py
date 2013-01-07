@@ -83,7 +83,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, verbose_name=u'Бренд')
     name = models.CharField(max_length=255, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=255, unique=True, verbose_name=u'Ссылка')
-    price = models.DecimalField(max_digits=9,decimal_places=2, verbose_name=u'Цена')
+    price = models.DecimalField(max_digits=9,decimal_places=0, verbose_name=u'Цена')
     thumbnail_image = ThumbnailImageField(upload_to='static/img/products_image', thumb_width=200, thumb_height=200, completion="thumb", verbose_name=u'Фото')
     # Метаданные товара
     is_active = models.BooleanField(default=True, verbose_name=u'Включен')

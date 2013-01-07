@@ -551,6 +551,13 @@ width: 130px;
 	-webkit-appearance: none;
 }
 
+#options input#button {
+	margin: 10px 0 0 -5px!important;
+	width:72px!important; 
+	height:23px!important;
+	border: none!important;
+}
+
 #price,#price2 {
 	border:1px solid #074776;
 	padding:5px;
