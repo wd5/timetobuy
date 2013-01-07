@@ -81,47 +81,89 @@ def section(request, section_slug):
     brands_cat = set()
     brands = []
     for clock in clocks:
-        genders.add((clock.get_gender_display(), clock.gender))
-        mechanisms.add((clock.get_mechanism_display(), clock.mechanism))
-        bodys.add((clock.get_body_display(), clock.body))
-        bracelets.add((clock.get_bracelet_display(), clock.bracelet))
-        bracelet_lengths.add((clock.get_bracelet_length_display(), clock.bracelet_length))
-        windows.add((clock.get_window_display(), clock.window))
-        waterproofs.add((clock.get_waterproof_display(), clock.waterproof))
-        colors.add((clock.get_color_display(), clock.color))
-        time_indications.add((clock.get_time_indication_display(), clock.time_indication))
-        coated_housings.add((clock.get_coated_housing_display(), clock.coated_housing))
-        case_forms.add((clock.get_case_form_display(), clock.case_form))
-        coating_bracelets.add((clock.get_coating_bracelet_display(), clock.coating_bracelet))
-        dial_colors.add((clock.get_color_display(), clock.dial_color))
-        calendars.add((clock.get_calendar_display(), clock.calendar))
-        chronographs.add((clock.get_chronograph_display(), clock.chronograph))
-        type_of_locks.add((clock.get_type_of_lock_display(), clock.type_of_lock))
-        battery.add((clock.get_battery_display(), clock.battery))
-        gps.add((clock.get_gps_display(), clock.gps))
-        digit.add((clock.get_digit_display(), clock.digit))
-        format.add((clock.get_format_display(), clock.format))
-        seconds.add((clock.get_seconds_display(), clock.seconds))
-        skeleton.add((clock.get_skeleton_display(), clock.skeleton))
-        boom.add((clock.get_boom_display(), clock.boom))
-        auto_battery.add((clock.get_auto_battery_display(), clock.auto_battery))
-        anti_reflective.add((clock.get_anti_reflective_display(), clock.anti_reflective))
-        stone.add((clock.get_stone_display(), clock.stone))
-        clock_accuracy.add((clock.get_clock_accuracy_display(), clock.clock_accuracy))
-        alarm.add((clock.get_alarm_display(), clock.alarm))
-        pulse.add((clock.get_pulse_display(), clock.pulse))
-        flash_light_display.add((clock.get_flash_light_display_display(), clock.flash_light_display))
-        flash_light_arrow.add((clock.get_flash_light_arrow_display(), clock.flash_light_arrow))
-        second_time.add((clock.get_second_time_display(), clock.second_time))
-        note.add((clock.get_note_display(), clock.note))
-        second_timer.add((clock.get_second_timer_display(), clock.second_timer))
-        compass.add((clock.get_compass_display(), clock.compass))
-        timer.add((clock.get_timer_display(), clock.timer))
-        thermometer.add((clock.get_thermometer_display(), clock.thermometer))
-        altimeter.add((clock.get_altimeter_display(), clock.altimeter))
-        memory.add((clock.get_memory_display(), clock.memory))
-        weight.add((clock.get_weight_display(), clock.weight))
-        size.add((clock.get_size_display(), clock.size))
+        if clock.gender != None:
+            genders.add((clock.get_gender_display(), clock.gender))
+        if clock.mechanism != None:
+            mechanisms.add((clock.get_mechanism_display(), clock.mechanism))
+        if clock.body != None:
+            bodys.add((clock.get_body_display(), clock.body))
+        if clock.bracelet != None:
+            bracelets.add((clock.get_bracelet_display(), clock.bracelet))
+        if clock.bracelet_length != None:
+            bracelet_lengths.add((clock.get_bracelet_length_display(), clock.bracelet_length))
+        if clock.window != None:
+            windows.add((clock.get_window_display(), clock.window))
+        if clock.waterproof != None:
+            waterproofs.add((clock.get_waterproof_display(), clock.waterproof))
+        if clock.color != None:
+            colors.add((clock.get_color_display(), clock.color))
+        if clock.time_indication != None:
+            time_indications.add((clock.get_time_indication_display(), clock.time_indication))
+        if clock.coated_housing != None:
+            coated_housings.add((clock.get_coated_housing_display(), clock.coated_housing))
+        if clock.case_form != None:
+            case_forms.add((clock.get_case_form_display(), clock.case_form))
+        if clock.coating_bracelet != None:
+            coating_bracelets.add((clock.get_coating_bracelet_display(), clock.coating_bracelet))
+        if clock.dial_color != None:
+            dial_colors.add((clock.get_dial_color_display(), clock.dial_color))
+        if clock.calendar != None:
+            calendars.add((clock.get_calendar_display(), clock.calendar))
+        if clock.chronograph != None:
+            chronographs.add((clock.get_chronograph_display(), clock.chronograph))
+        if clock.type_of_lock != None:
+            type_of_locks.add((clock.get_type_of_lock_display(), clock.type_of_lock))
+        if clock.battery != None:
+            battery.add((clock.get_battery_display(), clock.battery))
+        if clock.gps != None:
+            gps.add((clock.get_gps_display(), clock.gps))
+        if clock.digit != None:
+            digit.add((clock.get_digit_display(), clock.digit))
+        if clock.format != None:
+            format.add((clock.get_format_display(), clock.format))
+        if clock.seconds != None:
+            seconds.add((clock.get_seconds_display(), clock.seconds))
+        if clock.skeleton != None:
+            skeleton.add((clock.get_skeleton_display(), clock.skeleton))
+        if clock.boom != None:
+            boom.add((clock.get_boom_display(), clock.boom))
+        if clock.auto_battery != None:
+            auto_battery.add((clock.get_auto_battery_display(), clock.auto_battery))
+        if clock.anti_reflective != None:
+            anti_reflective.add((clock.get_anti_reflective_display(), clock.anti_reflective))
+        if clock.stone != None:
+            stone.add((clock.get_stone_display(), clock.stone))
+        if clock.clock_accuracy != None:
+            clock_accuracy.add((clock.get_clock_accuracy_display(), clock.clock_accuracy))
+        if clock.alarm != None:
+            alarm.add((clock.get_alarm_display(), clock.alarm))
+        if clock.pulse != None:
+            pulse.add((clock.get_pulse_display(), clock.pulse))
+        if clock.flash_light_display != None:
+            flash_light_display.add((clock.get_flash_light_display_display(), clock.flash_light_display))
+        if clock.flash_light_arrow != None:
+            flash_light_arrow.add((clock.get_flash_light_arrow_display(), clock.flash_light_arrow))
+        if clock.second_time != None:
+            second_time.add((clock.get_second_time_display(), clock.second_time))
+        if clock.note != None:
+            note.add((clock.get_note_display(), clock.note))
+        if clock.second_timer != None:
+            second_timer.add((clock.get_second_timer_display(), clock.second_timer))
+        if clock.compass != None:
+            compass.add((clock.get_compass_display(), clock.compass))
+        if clock.timer != None:
+            timer.add((clock.get_timer_display(), clock.timer))
+        if clock.thermometer != None:
+            thermometer.add((clock.get_thermometer_display(), clock.thermometer))
+        if clock.altimeter != None:
+            altimeter.add((clock.get_altimeter_display(), clock.altimeter))
+        if clock.memory != None:
+            memory.add((clock.get_memory_display(), clock.memory))
+        if clock.weight != None:
+            weight.add((clock.get_weight_display(), clock.weight))
+        if clock.size != None:
+            size.add((clock.get_size_display(), clock.size))
         brands_cat.add(clock.brand.category)
         brands.append(clock.brand.id)
+    print memory
     return render(request, 'catalog.html', locals())
