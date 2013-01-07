@@ -8,29 +8,23 @@
             <div class="block">
                 <ul class="countryMenu noList">
                     {% for cat in brands_cat %}
-                        {% if cat.id in products_cat %}
-                            <li>
-                                <a href="#"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
-                                <ul>
-                                    {% for brand in cat.brand_set.all %}
-                                        {% if brand.id in products_brand %}
-                                            <li><a href="{{ brand }}">{{ brand.name }}</a></li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endif %}
+                        <li>
+                            <a href="#"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
+                            <ul>
+                                {% for brand in cat.brand_set.all %}
+                                    {% if brand.id in brands %}
+                                        <li><a href="{{ brand }}">{{ brand.name }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-
         <h2 class="trigger"><a href="#">Активные фильтры</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
-                <a href="#"><s>Кварцевые</s></a>
-                <a href="#"><s>Металические</s></a>
-                <a href="#"><s>Стальной ремешок</s></a>
             </div>
         </div>
 
@@ -55,21 +49,120 @@
             </div>
         </div>
 
-        <h2 class="trigger"><a href="#">Механизм</a></h2>
+        <h2 class="trigger"><a href="#">Пол</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
-                {% for feature in products %}
-                    <a href="#">{{ feature.clock.get_mechanism_display }}</a>
+                {% for feature in genders %}
+                    <a href="#" data-filter-name="gender" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
                 {% endfor %}
             </div>
         </div>
 
-        <h2 class="trigger"><a href="#">Циферблат</a></h2>
+        <h2 class="trigger"><a href="#">Механизм</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
-                <a href="#">Кварцевые</a>
-                <a href="#">Металические</a>
-                <a href="#">Стальной ремешок</a>
+                {% for feature in mechanisms %}
+                    <a href="#" data-filter-name="mechanism" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Корпус</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in bodys %}
+                    <a href="#" data-filter-name="body" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Браслет</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in bracelets %}
+                    <a href="#" data-filter-name="bracelet" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Длина браслета</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in bracelet_lengths %}
+                    <a href="#" data-filter-name="bracelet_length" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Стекло</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in windows %}
+                    <a href="#" data-filter-name="window" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Водозащита</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in waterproofs %}
+                    <a href="#" data-filter-name="waterproof" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Цвет ремня/Браслета</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in colors %}
+                    <a href="#" data-filter-name="color" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Индикация времени</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in time_indications %}
+                    <a href="#" data-filter-name="time_indication" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Цвет циферблата</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in dial_colors %}
+                    <a href="#" data-filter-name="dial_color" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Календарь</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in calendars %}
+                    <a href="#" data-filter-name="calendar" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Хронограф</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in chronographs %}
+                    <a href="#" data-filter-name="chronograph" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2 class="trigger"><a href="#">Тип застежки</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in type_of_locks %}
+                    <a href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -93,14 +186,14 @@
 </div>
 
 <div class="itemList txt11">
-    {% for product in products %}
+    {% for clock in clocks %}
         <div class="itemCard">
         <span class="itemAdd"><a href="#"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
         <a class="itemLink" href="#">
-            <img src="/{{ product.thumbnail_image.thumb_url}}" width="150">
-            <span class="catBrands black">{{ product.brand }}</span>
-            <span class="catName grey">{{ product.category.all.0.section.name }} {{ product.name }}</span>
-            <span class="catPrice blue">{{ product.price }} руб.</span>
+            <img src="/{{ clock.thumbnail_image.thumb_url}}" width="150">
+            <span class="catBrands black">{{ clock.brand }}</span>
+            <span class="catName grey">{{ clock.category.all.0.section.name }} {{ clock.name }}</span>
+            <span class="catPrice blue">{{ clock.price }} руб.</span>
         </a>
     </div>
     {% endfor %}

@@ -1,6 +1,6 @@
 from catalog.clock_features import *
 
-def clock_features():
+def clock_features(request):
     return {
-        'mechanism': MECHANISM_CHOICES,
+        'mechanisms': MECHANISM_CHOICES,
         }

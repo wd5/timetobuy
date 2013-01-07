@@ -1,11 +1,40 @@
-$(document).ready(function() { // проверяем загружен ли DOM
+$(document).ready(function() {
 
-$('h2:first').addClass('active'); //добавляем класс .active к первому блоку 
-$('.toggle_container:not(:first)').hide(); // оставляем открытым первый блок
+    function updateURLParameter(url, param, paramVal){
+        var newAdditionalURL = "";
+        var tempArray = url.split("?");
+        var baseURL = tempArray[0];
+        var additionalURL = tempArray[1];
+        var temp = "";
+        if (additionalURL) {
+            tempArray = additionalURL.split("&");
+            for (i=0; i<tempArray.length; i++){
+                if(tempArray[i].split('=')[0] != param){
+                    newAdditionalURL += temp + tempArray[i];
+                    temp = "&";
+                }
+            }
+        }
 
-$('h2.trigger').click(function() { 
-	$(this).toggleClass('active').next().slideToggle('slow').siblings("div:visible").slideUp('slow'); // при клике раскрываем блок и закрываем другие видимые блоки
-	$(this).siblings('h2').removeClass('active'); // удаляем класс .active у родственных блоков
-	return false; // возвращаем false для запрета перехода по ссылке
-});
+        var rows_txt = temp + "" + param + "=" + paramVal;
+        return baseURL + "?" + newAdditionalURL + rows_txt;
+    }
+
+
+    $('h2:first').addClass('active');
+    $('.toggle_container:not(:first)').hide();
+
+    $('h2.trigger').click(function() {
+    	$(this).toggleClass('active').next().slideToggle('slow').siblings("div:visible").slideUp('slow');
+    	$(this).siblings('h2').removeClass('active');
+    	return false;
+    });
+
+    $('.toggle_container a').on('click', function(e) {
+        var data = $(this).data();
+        var newURL = updateURLParameter(window.location.href, data.filterName, data.filterValue);
+        e.preventDefault();
+        window.location = newURL;
+    });
+
 });
