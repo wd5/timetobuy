@@ -21,9 +21,12 @@ def section(request, section_slug):
         filter_name = clocks[0]._meta.get_field_by_name(param)[0].verbose_name
         new_p.append(filter_name)
         value = clocks[0].__getattribute__(param)
-        for item in clocks[0]._meta.get_field_by_name(param)[0].choices:
-            if item[0] == value:
-                new_p.append(item[1])
+        if param == 'brand':
+            new_p.append(value)
+        else:
+            for item in clocks[0]._meta.get_field_by_name(param)[0].choices:
+                if item[0] == value:
+                    new_p.append(item[1])
         chosen_params.append(new_p)
     genders = set()
     mechanisms = set()
