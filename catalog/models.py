@@ -40,7 +40,7 @@ class Section(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('catalog.views.section', [str(self.slug)])
+        return ('catalog.views.section_category', [str(self.slug)])
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'Название')
@@ -60,7 +60,7 @@ class Category(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('catalog-page', [str(self.slug)])
+        return ('catalog.views.section_category', [str(self.slug)])
 
 class CategoryProduct(models.Model):
     category = models.ForeignKey('Category')

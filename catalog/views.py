@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
-from catalog.models import Section, Product, Clock, BrandsCategory
+from catalog.models import Section, Category, Product, Clock, BrandsCategory
 from django.shortcuts import get_object_or_404, render_to_response, render
 
 def main(request):
     return render(request, 'main.html', locals())
 
-def section(request, section_slug):
+def section_category(request, section_category_slug):
     params = request.GET.dict()
 
-    section = Section.objects.get(slug=section_slug)
+    try:
+        section = Section.objects.get(slug=section_category_slug)
+        clocks = Clock.objects.filter(category__section=section)
+    except:
+        section = Category.objects.get(slug=section_category_slug)
+        clocks = Clock.objects.filter(category=section)
     chosen_params = []
     price_range = False
     if params.has_key('price-range'):
@@ -18,9 +23,9 @@ def section(request, section_slug):
         brands_cat_filter = params['brandscat']
         chosen_params.append(['brandscat', u'Бренд', BrandsCategory.objects.get(id=brands_cat_filter).name])
         params.pop('brandscat')
-        clocks = Clock.objects.filter(category__section=section).filter(**params).filter(brand__category_id=brands_cat_filter)
+        clocks = clocks.filter(**params).filter(brand__category_id=brands_cat_filter)
     else:
-        clocks = Clock.objects.filter(category__section=section).filter(**params)
+        clocks = clocks.filter(**params)
     for param in params:
         new_p = [param,]
         filter_name = clocks[0]._meta.get_field_by_name(param)[0].verbose_name
