@@ -49,6 +49,7 @@
             </div>
         </div>
 
+        {% if genders|length != 1 %}
         <h2 class="trigger"><a href="#">Пол</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -57,7 +58,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if mechanisms|length != 1 %}
         <h2 class="trigger"><a href="#">Механизм</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -66,7 +69,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if bodys|length != 1 %}
         <h2 class="trigger"><a href="#">Корпус</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -75,7 +80,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if bracelets|length != 1 %}
         <h2 class="trigger"><a href="#">Браслет</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -84,7 +91,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if bracelet_lengths|length != 1 %}
         <h2 class="trigger"><a href="#">Длина браслета</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -93,7 +102,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if windows|length != 1 %}
         <h2 class="trigger"><a href="#">Стекло</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -102,7 +113,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if waterproofs|length != 1 %}
         <h2 class="trigger"><a href="#">Водозащита</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -111,7 +124,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if colors|length != 1 %}
         <h2 class="trigger"><a href="#">Цвет ремня/Браслета</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -120,7 +135,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if time_indications|length != 1 %}
         <h2 class="trigger"><a href="#">Индикация времени</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -129,7 +146,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if dial_colors|length != 1 %}
         <h2 class="trigger"><a href="#">Цвет циферблата</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -138,7 +157,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if calendars|length != 1 %}
         <h2 class="trigger"><a href="#">Календарь</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -147,7 +168,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if chronographs|length != 1 %}
         <h2 class="trigger"><a href="#">Хронограф</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -156,7 +179,9 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if type_of_locks|length != 1 %}
         <h2 class="trigger"><a href="#">Тип застежки</a></h2>
         <div class="toggle_container" style="display: none;">
             <div class="block blue opacityBlock">
@@ -165,6 +190,7 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 
