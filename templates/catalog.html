@@ -3,28 +3,39 @@
 <div class="content fullBlock left">
 <div class="leftCol">
     <div id="container" class="opacityBlock">
-        <h2 class="trigger active"><a href="#">Бренды часов</a></h2>
+
+    {% if chosen_params %}
+    <h2 class="trigger"><a href="#">Активные фильтры</a></h2>
+        <div class="toggle_container">
+            <div class="block blue opacityBlock">
+                <div class="block blue opacityBlock acticveFilter">
+                    {% for param in chosen_params %}
+                    <b class="black">{{ param.1 }}:</b><br>
+                    <a href="#" class="active_link" data-filter-name="{{ param.0 }}" data-filter-value="delete">{{ param.2 }}</a>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <h2 class="trigger active"><a href="#">Бренды часов</a></h2>
         <div class="toggle_container">
             <div class="block">
                 <ul class="countryMenu noList">
                     {% for cat in brands_cat %}
                         <li>
-                            <a href="#"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
+                            <a href="#" data-filter-name="brandscat" data-filter-value="{{ cat.id }}"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
                             <ul>
                                 {% for brand in cat.brand_set.all %}
                                     {% if brand.id in brands %}
-                                        <li><a href="{{ brand }}">{{ brand.name }}</a></li>
+                                        <li><a href="#" data-filter-name="brand" data-filter-value="{{ brand.id }}">{{ brand.name }}</a></li>
                                     {% endif %}
                                 {% endfor %}
                             </ul>
                         </li>
                     {% endfor %}
                 </ul>
-            </div>
-        </div>
-        <h2 class="trigger"><a href="#">Активные фильтры</a></h2>
-        <div class="toggle_container" style="display: none;">
-            <div class="block blue opacityBlock">
             </div>
         </div>
 

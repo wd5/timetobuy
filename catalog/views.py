@@ -7,8 +7,24 @@ def main(request):
 
 def section(request, section_slug):
     params = request.GET.dict()
+
     section = Section.objects.get(slug=section_slug)
-    clocks = Clock.objects.filter(category__section=section).filter(**params)
+    if params.has_key('brandscat'):
+        brands_cat_filter = params['brandscat']
+        params.pop('brandscat')
+        clocks = Clock.objects.filter(category__section=section).filter(**params).filter(brand__category_id=brands_cat_filter)
+    else:
+        clocks = Clock.objects.filter(category__section=section).filter(**params)
+    chosen_params = []
+    for param in params:
+        new_p = [param,]
+        filter_name = clocks[0]._meta.get_field_by_name(param)[0].verbose_name
+        new_p.append(filter_name)
+        value = clocks[0].__getattribute__(param)
+        for item in clocks[0]._meta.get_field_by_name(param)[0].choices:
+            if item[0] == value:
+                new_p.append(item[1])
+        chosen_params.append(new_p)
     genders = set()
     mechanisms = set()
     bodys = set()

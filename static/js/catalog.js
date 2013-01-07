@@ -16,7 +16,10 @@ $(document).ready(function() {
             }
         }
 
-        var rows_txt = temp + "" + param + "=" + paramVal;
+        var rows_txt = '';
+        if (paramVal !== 'delete') {
+            rows_txt = temp + "" + param + "=" + paramVal;
+        }
         return baseURL + "?" + newAdditionalURL + rows_txt;
     }
 
@@ -31,9 +34,9 @@ $(document).ready(function() {
     });
 
     $('.toggle_container a').on('click', function(e) {
+        e.preventDefault();
         var data = $(this).data();
         var newURL = updateURLParameter(window.location.href, data.filterName, data.filterValue);
-        e.preventDefault();
         window.location = newURL;
     });
 

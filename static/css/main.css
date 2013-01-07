@@ -372,6 +372,10 @@ h1 {
 	margin-right: 10px;
 }
 
+.leftCol .acticveFilter a {
+	background: url(../img/cartDel.jpg) no-repeat right 5px;
+}
+
 .rightCol {
 	float: left;
 	width: 790px;
