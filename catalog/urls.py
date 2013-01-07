@@ -4,5 +4,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('catalog.views',
     url(r'^$', 'main', name='main-page'),
-    url(r'^section/(?P<section_category_slug>[-\w]+)/$', 'section_category', name="section-category-page"),
+    url(r'^section/(?P<slug>[-\w]+)/$', 'section', name="section-page"),
+    url(r'^category/(?P<slug>[-\w]+)/$', 'section', name="category-page"),
+    url(r'^brand/(?P<slug>[-\w]+)/$', 'section', name="brand-page"),
 )

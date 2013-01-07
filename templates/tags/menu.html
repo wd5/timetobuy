@@ -1,4 +1,11 @@
-<li><a href="#">Бренды</a></li>
+<li>
+    <a href="#">Бренды</a>
+    <ul>
+        {% for cat in brand_cats %}
+            <li><a tabindex="-1" href="{{ cat.get_absolute_url }}"> {{ cat.name }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
 {% for section in sections %}
     <li>
         <a tabindex="-1" href="{{ section.get_absolute_url }}">{{ section.name }}</a>

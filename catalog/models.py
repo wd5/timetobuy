@@ -14,6 +14,11 @@ class BrandsCategory(models.Model):
     class Meta:
         verbose_name_plural = u'Категории брендов'
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('brand-page', [str(self.slug)])
+
+
 class Brand(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name=u'Ссылка')
@@ -40,7 +45,7 @@ class Section(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('catalog.views.section_category', [str(self.slug)])
+        return ('section-page', [str(self.slug)])
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'Название')
@@ -60,7 +65,7 @@ class Category(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('catalog.views.section_category', [str(self.slug)])
+        return ('category-page', [str(self.slug)])
 
 class CategoryProduct(models.Model):
     category = models.ForeignKey('Category')

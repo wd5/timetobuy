@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
-from catalog.models import Section, Category, Product, Clock, BrandsCategory
-from django.shortcuts import get_object_or_404, render_to_response, render
+from catalog.models import Section, Category, Clock, BrandsCategory, Brand
+from django.shortcuts import render
 
 def main(request):
     return render(request, 'main.html', locals())
 
-def section_category(request, section_category_slug):
+def section(request, slug):
+    path = request.path.split('/')[1]
     params = request.GET.dict()
-
-    try:
-        section = Section.objects.get(slug=section_category_slug)
+    if path == 'section':
+        section = Section.objects.get(slug=slug)
         clocks = Clock.objects.filter(category__section=section)
-    except:
-        section = Category.objects.get(slug=section_category_slug)
+    elif path == 'category':
+        section = Category.objects.get(slug=slug)
         clocks = Clock.objects.filter(category=section)
+    elif path == 'brand':
+        section = BrandsCategory.objects.get(slug=slug)
+        clocks = Clock.objects.filter(brand__category=section)
     chosen_params = []
     price_range = False
     if params.has_key('price-range'):
