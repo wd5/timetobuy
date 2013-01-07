@@ -41,7 +41,6 @@ class BrandsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('name',)}
 
 admin.site.register(Brand, BrandsAdmin)
-admin.site.register(Collection)
 
 class BrandsCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)

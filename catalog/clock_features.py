@@ -359,12 +359,6 @@ SECOND_TIMER_CHOICES = (
     (1, 'Нет'),
 )
 
-# Секундомер
-SECOND_TIMER_CHOICES = (
-    (0, 'Да'),
-    (1, 'Нет'),
-)
-
 # Компас
 COMPASS_CHOICES = (
     (0, 'Да'),

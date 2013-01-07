@@ -207,6 +207,282 @@
             </div>
         </div>
         {% endif %}
+
+        {% if battery|length != 1 %}
+        <h2 class="trigger"><a href="#">Питание</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in battery %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if gps|length != 1 %}
+        <h2 class="trigger"><a href="#">GPS</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in gps %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if digit|length != 1 %}
+        <h2 class="trigger"><a href="#">Цифры</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in digit %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if format|length != 1 %}
+        <h2 class="trigger"><a href="#">Формат</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in format %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if seconds|length != 1 %}
+        <h2 class="trigger"><a href="#">Секундная стрелка</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in seconds %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if skeleton|length != 1 %}
+        <h2 class="trigger"><a href="#">Скелетон</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in skeleton %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if boom|length != 1 %}
+        <h2 class="trigger"><a href="#">Противоударные</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in boom %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if auto_battery|length != 1 %}
+        <h2 class="trigger"><a href="#">Автоподзавод</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in auto_battery %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if anti_reflective|length != 1 %}
+        <h2 class="trigger"><a href="#">Антибликовое покрытие стекла</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in anti_reflective %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if stone|length != 1 %}
+        <h2 class="trigger"><a href="#">Камень-вставка</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in stone %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if clock_accuracy|length != 1 %}
+        <h2 class="trigger"><a href="#">Точность хода</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in clock_accuracy %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+      {% if alarm|length != 1 %}
+        <h2 class="trigger"><a href="#">Будильник</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in alarm %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if pulse|length != 1 %}
+        <h2 class="trigger"><a href="#">Пульсометр</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in pulse %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if flash_light_display|length != 1 %}
+        <h2 class="trigger"><a href="#">Подсветка дисплея</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in flash_light_display %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if flash_light_arrow|length != 1 %}
+        <h2 class="trigger"><a href="#">Подсветка стрелок</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in flash_light_arrow %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if second_time|length != 1 %}
+        <h2 class="trigger"><a href="#">Второй часовой пояс</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in second_time %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if note|length != 1 %}
+        <h2 class="trigger"><a href="#">Записная книжка</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in note %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if second_timer|length != 1 %}
+        <h2 class="trigger"><a href="#">Секундомер</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in second_timer %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if compass|length != 1 %}
+        <h2 class="trigger"><a href="#">Компас</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in compass %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if timer|length != 1 %}
+        <h2 class="trigger"><a href="#">Таймер</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in timer %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if thermometer|length != 1 %}
+        <h2 class="trigger"><a href="#">Термометр</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in thermometer %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if altimeter|length != 1 %}
+        <h2 class="trigger"><a href="#">Высотомер</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in altimeter %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% if memory|length != 1 %}
+        <h2 class="trigger"><a href="#">Встроенная память</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in memory %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if weight|length != 1 %}
+        <h2 class="trigger"><a href="#">Вес часов</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in weight %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if size|length != 1 %}
+        <h2 class="trigger"><a href="#">Размер часов</a></h2>
+        <div class="toggle_container" style="display: none;">
+            <div class="block blue opacityBlock">
+                {% for feature in size %}
+                    <a class="filter_link" href="#" data-filter-name="type_of_lock" data-filter-value="{{ feature.1 }}">{{ feature.0 }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
     </div>
 </div>
 

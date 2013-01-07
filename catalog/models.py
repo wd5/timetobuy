@@ -25,14 +25,6 @@ class Brand(models.Model):
     class Meta:
         verbose_name_plural = u'Бренды'
 
-class Collection(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=50, unique=True)
-    brand = models.ForeignKey(Brand)
-
-    class Meta:
-        verbose_name_plural = u'Коллекции'
-
 class Section(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name=u'Ссылка')
@@ -134,6 +126,31 @@ class Clock(Product):
     calendar = models.IntegerField(choices=CALENDAR_CHOICES, blank=True, null=True, verbose_name=u'Календарь')
     chronograph = models.IntegerField(choices=CHRONOGRAPH_CHOICES, blank=True, null=True, verbose_name=u'Хронограф')
     type_of_lock = models.IntegerField(choices=TYPE_OF_LOCK_CHOICES, blank=True, null=True, verbose_name=u'Тип застежки')
+    battery = models.IntegerField(choices=BATTERY_CHOICES, blank=True, null=True, verbose_name=u'Батарея')
+    gps = models.IntegerField(choices=GPS_CHOICES, blank=True, null=True, verbose_name=u'GPS')
+    digit = models.IntegerField(choices=DIGIT_CHOICES, blank=True, null=True, verbose_name=u'Цифры')
+    format = models.IntegerField(choices=FORMAT_TIME_CHOICES, blank=True, null=True, verbose_name=u'Формат')
+    seconds = models.IntegerField(choices=SECOND_ARROW_CHOICES, blank=True, null=True, verbose_name=u'Секундная стрелка')
+    skeleton = models.IntegerField(choices=SCELETON_CHOICES, blank=True, null=True, verbose_name=u'Скелетон')
+    boom = models.IntegerField(choices=BOOM_CHOICES, blank=True, null=True, verbose_name=u'Противоударные')
+    auto_battery = models.IntegerField(choices=AUTO_BATTERY_CHOICES, blank=True, null=True, verbose_name=u'Автоподзавод')
+    anti_reflective = models.IntegerField(choices=AUTO_BATTERY_CHOICES, blank=True, null=True, verbose_name=u'Антибликовое покрытие стекла')
+    stone = models.IntegerField(choices=STONE_CHOICES, blank=True, null=True, verbose_name=u'Камень-вставка')
+    clock_accuracy = models.IntegerField(choices=CLOCK_ACCURACY_CHOICES, blank=True, null=True, verbose_name=u'Точность хода')
+    alarm = models.IntegerField(choices=ALARM_CHOICES, blank=True, null=True, verbose_name=u'Будильник')
+    pulse = models.IntegerField(choices=PULSE_CHOICES, blank=True, null=True, verbose_name=u'Пульсометр')
+    flash_light_display = models.IntegerField(choices=FLASH_LIGHT_DISPLAY_CHOICES, blank=True, null=True, verbose_name=u'Подсветка дисплея')
+    flash_light_arrow = models.IntegerField(choices=FLASH_LIGHT_ARROW_CHOICES, blank=True, null=True, verbose_name=u'Подсветка стрелок')
+    second_time = models.IntegerField(choices=SECOND_TIME_CHOICES, blank=True, null=True, verbose_name=u'Второй часовой пояс')
+    note = models.IntegerField(choices=NOTE_CHOICES, blank=True, null=True, verbose_name=u'Записная книжка')
+    second_timer = models.IntegerField(choices=SECOND_TIMER_CHOICES, blank=True, null=True, verbose_name=u'Секундомер')
+    compass = models.IntegerField(choices=COMPASS_CHOICES, blank=True, null=True, verbose_name=u'Компас')
+    timer = models.IntegerField(choices=TIMER_CHOICES, blank=True, null=True, verbose_name=u'Таймер')
+    thermometer = models.IntegerField(choices=THERMOMETER_CHOICES, blank=True, null=True, verbose_name=u'Термометр')
+    altimeter = models.IntegerField(choices=ALTIMETER_CHOICES, blank=True, null=True, verbose_name=u'Высотомер')
+    memory = models.IntegerField(choices=MEMORY_CHOICES, blank=True, null=True, verbose_name=u'Встроенная память')
+    weight = models.IntegerField(choices=WEIGHT_CHOICES, blank=True, null=True, verbose_name=u'Вес часов')
+    size = models.IntegerField(choices=SIZE_CHOICES, blank=True, null=True, verbose_name=u'Размер часов')
 
     def __unicode__(self):
         return self.name

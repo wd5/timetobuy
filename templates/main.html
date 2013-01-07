@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    123
+    <div class="banner fullBlock">
+        <div id="slides" class="bannerTop opacityBlock fullBlock">
+            <div class="slidesContainer" style="width: 100%; height: 300px; overflow: hidden; position: relative;"><div class="slidesControl" style="position: relative; width: 100%; height: 300px; left: 0px;"><a href="#" style="position: absolute; top: 0px; left: 0px; z-index: 0;"><img src="{{ STATIC_URL }}img/bannerTop.jpg"></a><a href="#" style="position: absolute; top: 0px; left: 0px; z-index: 0; display: none;"><img src="{{ STATIC_URL }}img/bannerTop.jpg"></a><a href="#" style="position: absolute; top: 0px; left: 0px; z-index: 0; display: none;"><img src="{{ STATIC_URL }}img/bannerTop.jpg"></a><a href="#" style="position: absolute; top: 0px; left: 0px; z-index: 0; display: none;"><img src="{{ STATIC_URL }}img/bannerTop.jpg"></a><a href="#" style="position: absolute; top: 0px; left: 0px; z-index: 0; display: none;"><img src="{{ STATIC_URL }}img/bannerTop.jpg"></a></div></div>
+            <a class="slidesPrevious slidesNavigation" href="#" title="Previous">Previous</a><a class="slidesNext slidesNavigation" href="#" title="Next">Next</a><ul class="slidesPagination"><li class="slidesCurrent"><a href="#0" class="slidesNavigation slidesPaginationItem" data-slidesindex="0"> 1</a></li><li><a href="#1" class="slidesNavigation slidesPaginationItem" data-slidesindex="1"> 2</a></li><li><a href="#2" class="slidesNavigation slidesPaginationItem" data-slidesindex="2"> 3</a></li><li><a href="#3" class="slidesNavigation slidesPaginationItem" data-slidesindex="3"> 4</a></li><li><a href="#4" class="slidesNavigation slidesPaginationItem" data-slidesindex="4"> 5</a></li></ul></div>
+        <div class="bannerDown">
+            <div class="bannerLeft left opacityBlock"><a href="#"><img src="{{ STATIC_URL }}img/bannerDownLeft.jpg"></a></div>
+            <div class="bannerNews left">
+                <span class="newsH1 darkGrey">Доставка по всей росии!</span>
+                <span class="newsTxt white txt11"><b><p>Cегодня мы заключили договор с службой доставки EMS.</p><p>Наш магазин наручных часов предлагает вашему вниманию изделия от ведущих мировых производителей.</p><p>У нас минимальные цены. Мы отслеживаем предлагаемые в других интернет магазинах цены и предлагаем минимально возможные. </p></b></span>
+                <span class="newsDate white txt10 left">15.09.12</span>
+                <span class="newsLink txt10 right opacityBlock"><a class="white" href="#">подробнее</a></span>
+            </div>
+            <div class="bannerRight right opacityBlock"><a href="#"><img src="{{ STATIC_URL }}img/BannerDownRight.jpg"></a></div>
+        </div>
+    </div>
+    <div class="mainBrands fullBlock">
+        <ul class="mainBrandsPic noList opacityBlock">
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand1.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand2.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand3.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand2.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand5.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand6.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand2.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand8.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand2.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand3.jpg"></a></td></tr></tbody></table></li>
+            <li><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand2.jpg"></a></td></tr></tbody></table></li>
+            <li class="last"><table cellpadding="0" cellspacing="0" border="0"><tbody><tr><td height="" valign="middle"><a href="#"><img src="{{ STATIC_URL }}img/brand5.jpg"></a></td></tr></tbody></table></li>
+        </ul>
+        <br>
+        <a class="allBrandsLink noDecoration opacity" href="#">
+            <span class="whiteBg black ">Посмотреть все бренды</span>
+        </a>
+    </div>
+    <div class="mainText txt11 darkGrey fullBlock clear opacityBlock"><h1 class="txt11">Добро пожаловать в интернет-магазин Time to Buy!</h1>Посетив наш интернет магазин наручных часов вы сможете приобрести изделия от известных своим качеством мировых производителей часов, по вполне доступным ценам.При этом все мужские и женские наручные часы сопровождаются соответствующими сертификатами качества и гарантией от производителя. У нас представлены как элитные наручные часы, так и недорогие, но при этом не менее качественные модели. Наш магазин наручных часов предлагает вашему вниманию изделия от ведущих мировых производителей.В нашем ассортименте вы найдете качественные, надежные, долговечные и стильные датские, немецкие, итальянские, французские, швейцарские, японские и американские мужские наручные часы и женские наручные часы по весьма демократичным ценам. Все изделия, которые представляет интернет-магазин наручных часов «Мир часов», – оригинальные, и мы можем подтвердить это соответствующими сертификатами. У нас минимальные цены. Мы отслеживаем предлагаемые в других интернет магазинах цены и предлагаем минимально возможные. В сравнении с обыкновенными магазинами наши цены ниже на 20-50%. Наручные часы: недорогие и элитные. Мы производим доставку по всей территории РФ. <a class="blue" href="#">Подробнее</a></div>
 {% endblock %}
