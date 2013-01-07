@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from catalog.models import Section, Category, Clock, BrandsCategory, Brand
+from catalog.models import Section, Category, Clock, BrandsCategory
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 def main(request):
@@ -8,6 +9,10 @@ def main(request):
 def section(request, slug):
     path = request.path.split('/')[1]
     params = request.GET.dict()
+    page = 1
+    if params.has_key('page'):
+        page = request.GET.get('page')
+        params.pop('page')
     if path == 'section':
         section = Section.objects.get(slug=slug)
         clocks = Clock.objects.filter(category__section=section)
@@ -15,8 +20,11 @@ def section(request, slug):
         section = Category.objects.get(slug=slug)
         clocks = Clock.objects.filter(category=section)
     elif path == 'brand':
-        section = BrandsCategory.objects.get(slug=slug)
-        clocks = Clock.objects.filter(brand__category=section)
+        if slug == 'all':
+            clocks = Clock.objects.all()
+        else:
+            section = BrandsCategory.objects.get(slug=slug)
+            clocks = Clock.objects.filter(brand__category=section)
     chosen_params = []
     price_range = False
     if params.has_key('price-range'):
@@ -173,5 +181,15 @@ def section(request, slug):
             size.add((clock.get_size_display(), clock.size))
         brands_cat.add(clock.brand.category)
         brands.append(clock.brand.id)
-    print memory
+    paginator = Paginator(clocks, 50)
+    try:
+        clocks = paginator.page(page)
+    except PageNotAnInteger:
+        clocks = paginator.page(1)
+    except EmptyPage:
+        clocks = paginator.page(paginator.num_pages)
     return render(request, 'catalog.html', locals())
+
+def clock(request, slug):
+    clock = Clock.objects.get(slug=slug)
+    return render(request, 'clock.html', locals())

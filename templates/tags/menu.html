@@ -1,5 +1,5 @@
 <li>
-    <a href="#">Бренды</a>
+    <a href="/brand/all/">Бренды</a>
     <ul>
         {% for cat in brand_cats %}
             <li><a tabindex="-1" href="{{ cat.get_absolute_url }}"> {{ cat.name }}</a></li>

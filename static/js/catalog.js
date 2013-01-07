@@ -37,6 +37,7 @@ $(document).ready(function() {
         e.preventDefault();
         var data = $(this).data();
         var newURL = updateURLParameter(window.location.href, data.filterName, data.filterValue);
+        newURL = updateURLParameter(newURL, 'page', 'delete');
         window.location = newURL;
     });
 
@@ -44,5 +45,12 @@ $(document).ready(function() {
         e.preventDefault();
         var newURL = updateURLParameter(window.location.href, 'price-range', $('#price').val() + ':' + $('#price2').val());
         window.location = newURL;
-    })
+    });
+
+    $('.pagPage a').on('click', function(e) {
+        e.preventDefault();
+        var data = $(this).data();
+        var newURL = updateURLParameter(window.location.href, 'page', data.page);
+        window.location = newURL;
+    });
 });

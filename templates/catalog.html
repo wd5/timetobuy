@@ -491,15 +491,18 @@
     <h1 class="left black">{{ section.name }}</h1>
 </div>
 
+
 <div class="sortAndPag txt11 opacityBlock">
     <div class="pagPage">
-        <a href="#">Показать все</a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">Дальше</a>
+        {% if clocks.has_previous %}
+            <a href="#" data-page="{{ clocks.previous_page_number }}">Назад</a>
+        {% endif %}
+        <span class="current">
+        Страница {{ clocks.number }} из {{ clocks.paginator.num_pages }}.
+    </span>
+        {% if clocks.has_next %}
+            <a href="#" data-page="{{ clocks.next_page_number }}">Дальше</a>
+        {% endif %}
     </div>
 </div>
 
@@ -507,7 +510,7 @@
     {% for clock in clocks %}
         <div class="itemCard">
         <span class="itemAdd"><a href="#"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
-        <a class="itemLink" href="#">
+        <a class="itemLink" href="{{ clock.get_absolute_url }}">
             <img src="/{{ clock.thumbnail_image.thumb_url}}" width="150">
             <span class="catBrands black">{{ clock.brand }}</span>
             <span class="catName grey">{{ clock.category.all.0.section.name }} {{ clock.name }}</span>
@@ -517,17 +520,21 @@
     {% endfor %}
 </div>
 
-<div class="sortAndPag txt11 opacityBlock">
-    <div class="pagPage">
-        <a href="#">Показать все</a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">Дальше</a>
+
+    <div class="sortAndPag txt11 opacityBlock">
+        <div class="pagPage">
+            {% if clocks.has_previous %}
+                <a href="#" data-page="{{ clocks.previous_page_number }}">Назад</a>
+            {% endif %}
+            <span class="current">
+        Страница {{ clocks.number }} из {{ clocks.paginator.num_pages }}.
+    </span>
+            {% if clocks.has_next %}
+                <a href="#" data-page="{{ clocks.next_page_number }}">Дальше</a>
+            {% endif %}
+        </div>
     </div>
-</div>
+
 </div>
 </div>
 {% endblock %}

@@ -162,3 +162,7 @@ class Clock(Product):
 
     class Meta:
         verbose_name_plural = u'Часы'
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('clock-page', [str(self.slug)])
