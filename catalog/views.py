@@ -23,6 +23,7 @@ def section(request, section_slug):
         clocks = Clock.objects.filter(category__section=section).filter(**params)
     if price_range:
         clocks = clocks.filter(price__range=(int(price_range.split(':')[0]), int(price_range.split(':')[1])))
+        chosen_params.append(['price-range', u'Фильтр цены', price_range])
     for param in params:
         new_p = [param,]
         filter_name = clocks[0]._meta.get_field_by_name(param)[0].verbose_name
