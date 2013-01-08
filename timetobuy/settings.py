@@ -163,6 +163,6 @@ LOGGING = {
 }
 
 try:
-    from yorcc.local_settings import *
+    from timetobuy.local_settings import *
 except ImportError:
     pass
