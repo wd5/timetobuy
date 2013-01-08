@@ -514,7 +514,12 @@
             <img src="/{{ clock.thumbnail_image.thumb_url}}" width="150">
             <span class="catBrands black">{{ clock.brand }}</span>
             <span class="catName grey">{{ clock.category.all.0.section.name }} {{ clock.name }}</span>
-            <span class="catPrice blue">{{ clock.price }} руб.</span>
+            <span class="catPrice blue">
+                {% if clock.old_price %}
+                <span class="red"><s>{{ clock.old_price }} руб.</s></span> &nbsp;<span class="black">{{ clock.price }} руб.</span></span>
+                {% else %}
+                <span class="catPrice blue">{{ clock.price }} руб.</span>
+            {% endif %}
         </a>
     </div>
     {% endfor %}
