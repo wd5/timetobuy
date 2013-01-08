@@ -1,5 +1,6 @@
 from django.contrib import admin
 from catalog.models import *
+from markitup.widgets import AdminMarkItUpWidget
 
 class CategoryProductinline(admin.TabularInline):
     model = CategoryProduct
@@ -22,6 +23,11 @@ class ClocksAdmin(admin.ModelAdmin):
     ordering = ['name']
     search_fields = ['name', 'description']
     prepopulated_fields = {'slug' : ('name',)}
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name == 'description':
+            kwargs['widget'] = AdminMarkItUpWidget()
+        return super(ClocksAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
 admin.site.register(Clock, ClocksAdmin)
 

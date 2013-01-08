@@ -76,14 +76,16 @@ class CategoryProduct(models.Model):
         ordering = ['position']
 
 class Product(models.Model):
+    article = models.CharField(max_length=255, verbose_name=u'Артикул')
     category = models.ManyToManyField(Category, verbose_name=u'Категория', through=CategoryProduct)
     brand = models.ForeignKey(Brand, verbose_name=u'Бренд')
     name = models.CharField(max_length=255, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=255, unique=True, verbose_name=u'Ссылка')
     price = models.DecimalField(max_digits=9,decimal_places=0, verbose_name=u'Цена')
+    old_price = models.DecimalField(max_digits=9,decimal_places=0, null=True, blank=True, verbose_name=u'Старая Цена')
     thumbnail_image = ThumbnailImageField(upload_to='static/img/products_image', thumb_width=200, thumb_height=200, completion="thumb", verbose_name=u'Фото')
-    # Метаданные товара
     is_active = models.BooleanField(default=True, verbose_name=u'Включен')
+    description = models.TextField(null=True, blank=True, verbose_name=u'Описание')
     # Временные отметки
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

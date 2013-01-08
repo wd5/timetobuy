@@ -192,4 +192,10 @@ def section(request, slug):
 
 def clock(request, slug):
     clock = Clock.objects.get(slug=slug)
+    features = []
+    for field in clock._meta.get_fields_with_model():
+        value = clock.__getattribute__(field[0].name)
+        for item in field[0].choices:
+            if item[0] == value:
+                features.append({field[0].verbose_name : item[1]})
     return render(request, 'clock.html', locals())
