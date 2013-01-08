@@ -53,4 +53,12 @@ $(document).ready(function() {
         var newURL = updateURLParameter(window.location.href, 'page', data.page);
         window.location = newURL;
     });
+
+    $('.buy_btn').on('click', function(e) {
+        var data = $(this).data();
+        e.preventDefault();
+        $.post(data.url, {'product_slug' : data.slug}, function(data) {
+            window.location = data.url;
+        });
+    });
 });

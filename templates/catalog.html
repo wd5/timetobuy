@@ -509,7 +509,7 @@
 <div class="itemList txt11">
     {% for clock in clocks %}
         <div class="itemCard">
-        <span class="itemAdd"><a href="#"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
+        <span class="itemAdd"><a href="#" class="buy_btn" data-slug="{{ clock.slug }}" data-url="/cart/add/"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
         <a class="itemLink" href="{{ clock.get_absolute_url }}">
             <img src="/{{ clock.thumbnail_image.thumb_url}}" width="150">
             <span class="catBrands black">{{ clock.brand }}</span>
