@@ -95,7 +95,7 @@ class Product(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('product-page', [str(self.slug)])
+        return ('clock-page', [str(self.slug)])
 
     class Meta:
         verbose_name_plural = u'Товар'
