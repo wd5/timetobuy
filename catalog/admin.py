@@ -60,4 +60,4 @@ class BrandsCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(BrandsCategory, BrandsCategoryAdmin)
 
-admin.site.register(CartProduct, CartItem)
+admin.site.register(CartItem)
