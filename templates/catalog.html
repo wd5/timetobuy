@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block main %}
+<div class="breadcrumbs txt12 opacityBlock fullBlock">
+    <span>Мужские часы&ensp;</span>
+    <span><a href="#">←&ensp;Часы</a></span>
+    <span><a href="#">←&ensp;Каталог</a></span>
+</div>
+
 <div class="content fullBlock left">
 <div class="leftCol">
     <div id="container" class="opacityBlock">
@@ -26,7 +33,7 @@
                 <ul class="countryMenu noList">
                     {% for cat in brands_cat %}
                         <li>
-                            <a class="filter_link" href="#" data-filter-name="brandscat" data-filter-value="{{ cat.id }}"><img src="/{{ cat.logo.url }}">{{ cat.name }}</a>
+                            <a class="filter_link" href="#" data-filter-name="brandscat" data-filter-value="{{ cat.id }}"><img src="{{ cat.logo.url }}">{{ cat.name }}</a>
                             <ul>
                                 {% for brand in cat.brand_set.all %}
                                     {% if brand.id in brands %}
@@ -487,10 +494,11 @@
 </div>
 
 <div class="rightCol">
+{% if section.name %}
 <div class="itemName txt12 grey noDecoration opacityBlock">
     <h1 class="left black">{{ section.name }}</h1>
 </div>
-
+{% endif %}
 
 <div class="sortAndPag txt11 opacityBlock">
     <div class="pagPage">
@@ -511,7 +519,11 @@
         <div class="itemCard">
         <span class="itemAdd"><a href="#" class="buy_btn" data-slug="{{ clock.slug }}" data-url="/cart/add/"><img src="{{ STATIC_URL }}img/addCart.png"></a></span>
         <a class="itemLink" href="{{ clock.get_absolute_url }}">
-            <img src="/{{ clock.thumbnail_image.thumb_url}}" width="150">
+	    {% thumbnail clock.productphoto_set.all.0.image "150x150" as im %}
+            <span style="width:150px;height:150px;display:block;text-align:center;">
+		      <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
+            </span>
+	    {% endthumbnail %}
             <span class="catBrands black">{{ clock.brand }}</span>
             <span class="catName grey">{{ clock.category.all.0.section.name }} {{ clock.name }}</span>
             <span class="catPrice blue">

@@ -1,23 +1,109 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
+
+
+{% block customtag %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/item.js"></script>
+    <link href="{{ STATIC_URL }}css/tabs.css" rel="stylesheet" media="all" />
+{% endblock %}
+
 {% block main %}
-    <div class="item fullBlock ">
-        <ul class="photoItem noList left"><li class="photoFirst"><img src="{{ STATIC_URL }}img/photoItem.jpg"></li></ul>
+    <div class="breadcrumbs txt12 opacityBlock fullBlock">
+        <span>Мужские часы&ensp;</span>
+        <span><a href="#">←&ensp;Часы</a></span>
+        <span><a href="#">←&ensp;Каталог</a></span>
+    </div>
+
+    <div class="item fullBlock left">
+        <ul class="photoItem noList left">            
+            {% for image in clock.productphoto_set.all %}
+                {% if forloop.first %}
+                    <li class="photoFirst marginB20">
+                        {% thumbnail image.image "390x390" as im %}
+                        <a rel="example_group" href="{{ image.image.url }}" title="{{ clock.brand }} {{ clock.name }}"><img src="{{ im.url }}" alt="{{ clock.brand }} {{ clock.name }}" ></a>
+                        {% endthumbnail %}
+                    <li>
+                {% else %}                    
+                    <li class="photoSecond">
+                        {% thumbnail image.image "75x75" as im %}
+                        <a rel="example_group" href="{{ image.image.url }}" title="{{ clock.brand }} {{ clock.name }}"><img src="{{ im.url }}"  alt="{{ clock.brand }} {{ clock.name }}" ></a>
+                        {% endthumbnail %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
         <ul class="description noList left">
             <h1>{{ clock.brand }} {{ clock.name }}</h1>
+            <li><a class="opacity" href="{{ clock.brand.slug }}"><img src="{{ clock.brand.logo.url }}"></a></li>
             <li class="price">
                 <span><b class="txt10">Цена:</b><br><b class="rub red">{{ clock.price }} руб.</b></span>
                 {% if clock.old_price %}
-                <span class="grey"><b class="txt10">Старая цена:</b><br><b class="rub"><s>{{ clock.old_price }} руб.</s></b></span>
+                    <span class="grey"><b class="txt10">Старая цена:</b><br><b class="rub"><s>{{ clock.old_price }} руб.</s></b></span>
                 {% endif %}
+                <span class="grey"><b class="txt10">Cкидка:</b><br><b class="rub">50&thinsp;%</b></span>
             </li>
-            <li><span><b class="txt10">Артикул:</b><br><b class="blue">{{ clock.article }}</b></span></li>
+            <li>
+                <span class="left sku"><b class="txt10 dBlock left">Артикул:</b><br><b class="blue">AX1458745</b></span>
+                <div class="left itemstar"><b class="txt10 dBlock left">Оценка:</b><br><b class="stars str5"></b></div>
+            </li>
             <li class="buyButton opacityBlock">
+                <span class="stock txt10 blue">Есть в наличии<br><b>(в связи с задержкой обновления, наличие утояняйте у менеджера)</b></span>
                 <span><a href=""><img class="buy_btn" src="{{ STATIC_URL }}img/buttonCart.jpg"></a></span>
+                <span><a class="blue txt11" id="various11" href="#inline11">Купить в один клик</a></span>
+            </li>
+            <li class="itemSocial">
+                <!-- Put this script tag to the <head> of your page -->
+                <script type="text/javascript" src="//vk.com/js/api/openapi.js?74"></script>
+                <script type="text/javascript">
+                  VK.init({apiId: 3314308, onlyWidgets: true});
+                </script>
+                <!-- Put this div tag to the place, where the Like block will be -->
+                <div id="vk_like" style="width:100px!important; float:left;" ></div>
+                <script type="text/javascript">
+                VK.Widgets.Like("vk_like", {type: "mini", height: 24});
+                </script>
+
+                <!-- Place this tag where you want the +1 button to render. -->
+                <div class="g-plusone" data-annotation="none" style="float:left;"></div>
+
+                <!-- Place this tag after the last +1 button tag. -->
+                <script type="text/javascript">
+                  window.___gcfg = {lang: 'ru'};
+
+                  (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                </script>
+
+                <div id="fb-root" style="float:left;"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-like" style="margin-right:5px; padding-top:2px; float:left;" data-href="{{ product.get_absolute_url }}" data-send="false" data-layout="button_count" data-width="50" data-show-faces="true"></div>
+
+                <div class="hrenotwitter"  style="width:110px!important; float:left; padding-top:2px;">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru" data-dnt="true">Твитнуть</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
             </li>
             <li class="txt11">{{ clock.description|safe }}</li>
         </ul>
+
+        <ul class="recomended noList opacityBlock left">
+            <li class="first"><img src="{{ STATIC_URL }}img/yourLike.jpg"></li>
+            <li><a href="#"><img align="center" height="150" src="{{ STATIC_URL }}img/photo-m.jpg"></a></li>
+            <li><a href="#"><img align="center" height="150" src="{{ STATIC_URL }}img/photo-m.jpg"></a></li>
+            <li><a href="#"><img align="center" height="150" src="{{ STATIC_URL }}img/photo-m.jpg"></a></li>
+        </ul>
     </div>
+
     <dl class="tabs txt12 left">
         <dt class="selected txt10">Характеристики</dt>
         <dd class="selected">
@@ -31,5 +117,112 @@
                 </ul>
             </div>
         </dd>
+                
+        <dt class="txt10">Заказ</dt>
+        <dd>
+            <div class="tab-content">
+                Aenean vitae eros. In eget massa. Donec malesuada. Sed accumsan tempus nunc. Sed neque nunc, fringilla quis, pharetra ut, feugiat a, justo. Nam ac ligula. Vestibulum eros magna, porta non, tristique quis, ultricies a, arcu. Integer condimentum lorem sit amet mauris. Morbi velit felis, tincidunt sed, auctor at, tincidunt et, magna. Aenean laoreet ultrices felis. Aliquam vehicula urna ac odio. Phasellus pulvinar, sem a pretium scelerisque, orci massa consectetur lacus, eget fringilla felis diam at ligula. Donec sodales lacus ut erat. Nunc mattis diam id lorem. Sed laoreet neque id diam. Mauris et sapien. Etiam tellus enim, gravida ac, accumsan semper, malesuada et, tellus. Ut mattis velit eu ante.
+            </div>
+        </dd>
+        
+        <dt class="txt10">Доставка</dt>
+        <dd>
+            <div class="tab-content">
+                Nulla accumsan. Aenean purus sapien, pharetra a, placerat id, egestas sed, diam. Phasellus in enim. In sollicitudin nibh ac nulla. Donec et justo in nibh molestie tincidunt. Mauris porttitor risus ac enim. Nunc mattis eros ut risus. Donec ultricies euismod nibh. Mauris faucibus tempus elit. In posuere tristique lorem. Curabitur enim velit, porttitor in, tristique at, cursus ac, enim. Maecenas varius, eros eu consectetur imperdiet, nisl justo luctus tellus, at volutpat diam felis et velit.
+            </div>
+        </dd>
+        
+        <dt class="txt10">Оплата</dt>
+        <dd>
+            <div class="tab-content">
+                Sed eu arcu. In et felis. Cras vel justo egestas lectus tincidunt blandit. Vestibulum eu tellus non ipsum tristique adipiscing. Proin rhoncus ipsum id lorem. Etiam vulputate lectus ut urna. Nullam leo nisi, lacinia sit amet, eleifend sed, ornare sit amet, velit. Curabitur consequat est. Nullam nunc ligula, faucibus non, lacinia vel, lacinia et, mauris. Etiam pharetra cursus tellus. Proin vehicula.
+            </div>
+        </dd>
+        
+        <dt class="txt10">Отзывы (4)</dt>
+        <dd>
+            <div class="tab-content">
+                <div class="marginB20">
+                    Автор: <b>Ромарио</b>
+                    <span class="dBlock"><b class="stars str1"></b></span>
+                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                </div>
+                <div class="marginB20">
+                    Автор: <b>Ромарио</b>
+                    <span class="dBlock"><b class="stars str2"></b></span>
+                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                </div>
+                <div class="marginB20">
+                    Автор: <b>Ромарио</b>
+                    <span class="dBlock"><b class="stars str3"></b></span>
+                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                </div>
+                <div class="marginB20">
+                    Автор: <b>Ромарио</b>
+                    <span class="dBlock"><b class="stars str4"></b></span>
+                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                </div>
+                <div class="marginB20">
+                    Автор: <b>Ромарио</b>
+                    <span class="dBlock"><b class="stars str5"></b></span>
+                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                </div>
+                <div class="marginB20">
+                    Автор: <b>Ромарио</b>
+                    <span class="dBlock"><b class="stars"></b></span>
+                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                </div>
+                <span class="dBlock"><a class="opacity" id="various22" href="#inline22"><img src="{{ STATIC_URL }}img/rewiew.png"></a></span>
+            </div>
+        </dd>
+    </dl>
+
+
+<!--Всплывающие окна-->
+    <div style="display: none;">
+        <div id="inline11" style="width:475px;height:150px;overflow:auto;">              
+            <form id="form1" class="blocks" action="#" method="post">
+                <b class="dBlock marginB10"><br>Введите номер Вашего телефона, и менеджер свяжется с Вами</b>
+                <input type="text" class="textInput" name="name" value="Ваш телефон*" onclick="this.value = '';"/>                      
+                <input class="opacity" type="image" src="{{ STATIC_URL }}img/cartComp.jpg">
+            </form>
+        </div>
+    </div>
+
+    <div style="display: none;">
+        <div id="inline22" style="width:475px;height:380px;overflow:auto;">              
+            <form id="form2" class="blocks" action="#" method="post">
+                <b class="dBlock marginB10"><br>Оставить отзыв о товаре</b>
+                <input type="text" class="textInput" name="name" value="Ваше имя*" onclick="this.value = '';"/>
+
+                <div class="addRew">
+                    <p class="left marginR20">
+                        <input class="niceRadio" type="radio" name="check1" />
+                        <span>1</span>
+                    </p>
+                    <p class="left marginR20">
+                        <input class="niceRadio" type="radio" name="check1" />
+                        <span>2</span>
+                    </p>
+                    <p class="left marginR20">
+                        <input class="niceRadio" type="radio" name="check1" />
+                        <span>3</span>
+                    </p>
+                    <p class="left marginR20">
+                        <input class="niceRadio" type="radio" name="check1" />
+                        <span>4</span>
+                    </p>
+                    <p class="left marginR20">
+                        <input class="niceRadio" type="radio" name="check1" checked="checked" />
+                        <span>5</span>
+                    </p>
+                </div>
+
+                <textarea class="textarea" name="message"></textarea>
+                <input class="opacity" type="image" src="{{ STATIC_URL }}img/sendButtom.jpg">
+            </form>
+        </div>
+    </div>
+
 
 {% endblock %}
