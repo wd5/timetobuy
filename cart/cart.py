@@ -28,7 +28,7 @@ def _generate_cart_id():
 def get_cart_items(request):
     try:
         cartid = CartItem.objects.get(cart_id = _cart_id(request))
-        return CartProduct.objects.filter(cartitem__id__iexact=cartid.id)
+        return CartProduct.objects.filter(cartitem=cartid)
     except :
         return False
 
