@@ -1,12 +1,15 @@
     # -*- coding: utf-8 -*-
 from django.db import models
-from catalog.fields import ThumbnailImageField
+from sorl.thumbnail import ImageField
 from catalog.clock_features import *
 
 class BrandsCategory(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name=u'Ссылка')
-    logo = models.ImageField(upload_to='static/img/brand_image', verbose_name=u'Лого')
+    logo = models.ImageField(upload_to='img/brands_category', verbose_name=u'Лого')
+    description = models.TextField(null=True, blank=True, verbose_name=u'Описание')
+    meta_title = models.TextField(null=True, blank=True, verbose_name=u'Meta title')
+    meta_descriprion = models.TextField(null=True, blank=True, verbose_name=u'Meta description')
 
     def __unicode__(self):
         return self.name
@@ -22,7 +25,11 @@ class BrandsCategory(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name=u'Ссылка')
+    logo = models.ImageField(upload_to='img/brand_image', verbose_name=u'Лого')
     category = models.ForeignKey(BrandsCategory, verbose_name=u'Категория бренда')
+    description = models.TextField(null=True, blank=True, verbose_name=u'Описание')
+    meta_title = models.TextField(null=True, blank=True, verbose_name=u'Meta title')
+    meta_descriprion = models.TextField(null=True, blank=True, verbose_name=u'Meta description')
 
     def __unicode__(self):
         return self.name
@@ -34,7 +41,10 @@ class Section(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=u'Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name=u'Ссылка')
     is_active = models.BooleanField(default=True, verbose_name=u'Включена')
+    description = models.TextField(null=True, blank=True, verbose_name=u'Описание')
     sort_number = models.IntegerField(verbose_name=u'Позиция')
+    meta_title = models.TextField(null=True, blank=True, verbose_name=u'Meta title')
+    meta_descriprion = models.TextField(null=True, blank=True, verbose_name=u'Meta description')
 
     class Meta:
         ordering = ['sort_number']
@@ -55,6 +65,8 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name=u'Дата обдновления')
     position = models.PositiveSmallIntegerField(verbose_name=u'Позиция')
+    meta_title = models.TextField(null=True, blank=True, verbose_name=u'Meta title')
+    meta_descriprion = models.TextField(null=True, blank=True, verbose_name=u'Meta description')
 
     def __unicode__(self):
         return self.name
@@ -70,7 +82,7 @@ class Category(models.Model):
 class CategoryProduct(models.Model):
     category = models.ForeignKey('Category')
     product = models.ForeignKey('Product', verbose_name=u'Товар')
-    position = models.PositiveSmallIntegerField("Position")
+    position = models.PositiveSmallIntegerField("Position", blank=True, null=True)
 
     class Meta:
         ordering = ['position']
@@ -83,7 +95,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, unique=True, verbose_name=u'Ссылка')
     price = models.DecimalField(max_digits=9,decimal_places=0, verbose_name=u'Цена')
     old_price = models.DecimalField(max_digits=9,decimal_places=0, null=True, blank=True, verbose_name=u'Старая Цена')
-    thumbnail_image = ThumbnailImageField(upload_to='static/img/products_image', thumb_width=200, thumb_height=200, completion="thumb", verbose_name=u'Фото')
+    sales_time = models.DateTimeField(null=True, blank=True, verbose_name=u'Дата окончания скидки')
     is_active = models.BooleanField(default=True, verbose_name=u'Включен')
     description = models.TextField(null=True, blank=True, verbose_name=u'Описание')
     # Временные отметки
@@ -102,7 +114,7 @@ class Product(models.Model):
 
 class ProductPhoto(models.Model):
     item = models.ForeignKey(Product)
-    image = ThumbnailImageField(upload_to='products_image', thumb_width=460, thumb_height=350, completion="resized" )
+    image = ImageField(upload_to='img/products_image')
 
     class Meta:
         ordering = ['item']

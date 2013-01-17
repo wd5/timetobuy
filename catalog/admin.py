@@ -1,6 +1,10 @@
 from django.contrib import admin
 from catalog.models import *
+from sorl.thumbnail.admin import AdminImageMixin
 from markitup.widgets import AdminMarkItUpWidget
+
+class PhotoInline(AdminImageMixin, admin.StackedInline):
+    model = ProductPhoto
 
 class CategoryProductinline(admin.TabularInline):
     model = CategoryProduct
@@ -18,11 +22,11 @@ class SectionsAdmin(admin.ModelAdmin):
 admin.site.register(Section, SectionsAdmin)
 
 class ClocksAdmin(admin.ModelAdmin):
-    inlines = [CategoryProductinline]
+    inlines = [CategoryProductinline, PhotoInline]
     list_per_page = 50
     ordering = ['name']
     search_fields = ['name', 'description']
-    prepopulated_fields = {'slug' : ('name',)}
+    prepopulated_fields = {'name':('article',),'slug' : ('name',)}
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'description':
