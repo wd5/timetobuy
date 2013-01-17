@@ -1,5 +1,6 @@
 from django.contrib import admin
 from catalog.models import *
+from cart.models import *
 from sorl.thumbnail.admin import AdminImageMixin
 from markitup.widgets import AdminMarkItUpWidget
 
@@ -58,3 +59,5 @@ class BrandsCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('name',)}
 
 admin.site.register(BrandsCategory, BrandsCategoryAdmin)
+
+admin.site.register(CartProduct, CartItem)
