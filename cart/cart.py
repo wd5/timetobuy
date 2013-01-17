@@ -134,7 +134,7 @@ class Subtotal:
         self.discount = 0
 
     def subtotal(self):
-        cart_total = decimal.Decimal('0.00')
+        cart_total = 0
         cart_discount_total = 0
         # Получаю все товары в корзине
         cart_products = get_cart_items(self.request)

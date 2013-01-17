@@ -49,7 +49,7 @@
             </li>
             <li class="buyButton opacityBlock">
                 <span class="stock txt10 blue">Есть в наличии<br><b>(в связи с задержкой обновления, наличие утояняйте у менеджера)</b></span>
-                <span><a href=""><img class="buy_btn" src="{{ STATIC_URL }}img/buttonCart.jpg"></a></span>
+                <span><a href="#" class="buy_btn" data-url="{% url add-to-cart %}" data-slug="{{ clock.slug }}"><img src="{{ STATIC_URL }}img/buttonCart.jpg"></a></span>
                 <span><a class="blue txt11" id="various11" href="#inline11">Купить в один клик</a></span>
             </li>
             <li class="itemSocial">

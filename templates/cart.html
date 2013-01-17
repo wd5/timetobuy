@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
 {% load cart_filters %}
+{% load thumbnail %}
 {% block main %}
     <div class="cartComplete txt11 opacityBlock">
+        {% if is_order %}
+            Спасибо за заказ, в ближайшее время мы с вами свяжемся.
+        {% else %}
         <h1>Оформление заказа</h1>
-        <form id="form" class="blocks" action="#" method="post">
+        <form id="form" class="blocks" action="" method="post">{% csrf_token %}
             <div class="cartLeft">
                 <div class="fieldHead"><span>Информация для оплаты и доставки заказа</span></div>
-                <input type="text" class="textInput" name="name" value="Имя*" onclick="this.value = '';">
-                <input type="text" class="textInput" name="phone" value="Телефон*" onclick="this.value = '';" oldautocomplete="remove" autocomplete="off">
-                <input type="text" class="textInput" name="email" value="E-mail*" onclick="this.value = '';" oldautocomplete="remove" autocomplete="off">
-                <input type="text" class="textInput" name="adres" value="Адрес" onclick="this.value = '';">
+                {{ form.name.errors }}
+                {{ form.name }}
+                {{ form.phone.errors }}
+                {{ form.phone }}
+                {{ form.email.errors }}
+                {{ form.email }}
+                {{ form.address }}
                 * поля обязательные к заполнению<br><br>
 
                 <div class="fieldHead"><span>Подтверждение заказа</span></div>
                 {% for item in cart_items %}
                     <div class="cartConfirm">
                     <a class="opacity" href="{{ item.product.get_absolute_url }}" target="_blank">
-                        <span class="cc1"><img src="/{{ item.product.thumbnail_image.url }}" width="80"></span>
+                        {% thumbnail item.product.productphoto_set.all.0.image "80x80" as im %}
+                            <span class="cc1"><img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"></span>
+                        {% endthumbnail %}
                         <span class="cc2 blue">{{ item.product.brand }}</span>
                         <span class="cc3">{{ item.product.article }}</span>
                         <span class="cc4">x {{ item.quantity }}</span>
                         <span class="cc5"><b>{{ item.quantity|multiply:item.product.price }} руб.</b></span>
                     </a>
-                    <span class="cc6 right"><a href="#"><img src="{{ STATIC_URL }}img/cartDel.jpg"></a></span>
+                    <span class="cc6 right"><a data-url="{% url remove-cart-item item.id %}" class="del-cart-item" href="#"><img src="{{ STATIC_URL }}img/cartDel.jpg"></a></span>
                 </div>
                 {% endfor %}
 
                 <div class="cartItogRight">
                     <div class="cartItog">
-                        <span class="ci2">{{ cart_subtotal }} <b class="noUpper">руб.</b></span>
+                        <span class="ci2 total">{{ cart_subtotal }} <b class="noUpper">руб.</b></span>
                         <span class="ci1">Сумма:</span>
                     </div>
                 </div>
@@ -44,19 +53,19 @@
                 <div class="fieldHead"><span>Способ доставки</span></div>
                 <div class="radioSelect">
                     <p>
-                        <span class="niceRadio radioChecked"><input type="radio" name="check1" id="undefined" checked="checked" tabindex="undefined" value="on"></span>
+                        <span class="niceRadio radioChecked">{{ form.delivery.0 }}></span>
                         <span>Доставка в приделах МКАД</span>
                         <b>0 руб.</b>
                     </p>
 
                     <p>
-                        <span class="niceRadio"><input type="radio" name="check1" id="undefined" tabindex="undefined" value="on"></span>
+                        <span class="niceRadio">{{ form.delivery.1 }}</span>
                         <span>За МКАД и Подмосковье<br>при сумме заказа менее 5 000 руб.</span>
                         <b>300 руб.</b>
                     </p>
 
                     <p>
-                        <span class="niceRadio"><input type="radio" name="check1" id="undefined" tabindex="undefined" value="on"></span>
+                        <span class="niceRadio">{{ form.delivery.2 }}</span>
                         <span>Доставка по России<br>первым классом</span>
                         <b>Расчитывается индивидуально</b>
                     </p>
@@ -68,5 +77,6 @@
                 <textarea class="textarea" name="message"></textarea>
             </div>
         </form>
+    {% endif %}
     </div>
 {% endblock %}
