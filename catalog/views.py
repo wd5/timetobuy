@@ -232,7 +232,7 @@ def clock(request, slug):
 def post_comment(request):
     product = Product.objects.get(slug=request.POST.get('product'))
     cartitem = CartItem.objects.get(cart_id=cart._cart_id(request))
-    if Comment.objects.filter(cart=cartitem):
+    if Comment.objects.filter(cart=cartitem, product=product):
         results = {'result':False}
     else:
         Comment(product=product, name=request.POST.get('name'), comment=request.POST.get('message'), rating=int(request.POST.get('check')), cart=cartitem).save()
