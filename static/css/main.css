@@ -801,3 +801,7 @@ width: 130px;
 .itemstar .stars {
 	margin-top: -2px;
 }
+
+.hide {
+    display: none;
+}

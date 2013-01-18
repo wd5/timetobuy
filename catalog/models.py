@@ -112,6 +112,22 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = u'Товар'
 
+class Comment(models.Model):
+    product = models.ForeignKey(Product)
+    name = models.CharField(max_length=255, verbose_name=u'Имя')
+    comment = models.TextField(verbose_name=u'Комментарий')
+    rating = models.IntegerField(verbose_name=u'Оценка')
+    is_moderate = models.BooleanField(default=False, verbose_name=u'Отмодерирован')
+    ordered_at = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата комментария')
+    cart = models.ForeignKey('cart.CartItem')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['-ordered_at']
+        verbose_name_plural = u'Комментарии'
+
 class ProductPhoto(models.Model):
     item = models.ForeignKey(Product)
     image = ImageField(upload_to='img/products_image')

@@ -35,7 +35,10 @@ def get_cart_items(request):
 # Возвращает колиство объектов(наименований товара) в корзине
 def cart_count(request):
     if CartItem.objects.filter(cart_id = _cart_id(request)):
-        return get_cart_items(request).count()
+        quantity = 0
+        for i in CartProduct.objects.filter(cartitem__cart_id =_cart_id(request)):
+            quantity += i.quantity
+        return quantity
     else:
         return 0
 
@@ -139,8 +142,9 @@ class Subtotal:
         # Получаю все товары в корзине
         cart_products = get_cart_items(self.request)
         discount_quantity = 0
-        for cart_item in cart_products:
-            cart_total += cart_item.product.price * cart_item.quantity
+        if cart_products:
+            for cart_item in cart_products:
+                cart_total += cart_item.product.price * cart_item.quantity
         cart_total -= self.discount
         return cart_total
 

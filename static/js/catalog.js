@@ -61,4 +61,25 @@ $(document).ready(function() {
             window.location = data.url;
         });
     });
+
+    $('#feedback-form').on('submit', function(e) {
+        e.preventDefault();
+        var form = $(this).serialize();
+        var data = $(this).data();
+        if (!$('.comment-name').val()) {
+            $('.comment-name-error').removeClass('hide');
+        }
+        else {
+            $('.comment-name-error').addClass('hide');
+            if (!$('.comment-message').val()) {
+                $('.comment-message-error').removeClass('hide');
+            }
+            else {
+                $('.comment-message-error').addClass('hide');
+                $.post(data.url, form, function(data) {
+                    window.location.reload();
+                });
+            }
+        }
+    })
 });

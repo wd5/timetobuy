@@ -60,4 +60,30 @@ class BrandsCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(BrandsCategory, BrandsCategoryAdmin)
 
-admin.site.register(CartItem)
+class ClientsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'ordered_at',)
+    list_display_links = ('name',)
+    exclude = ('referrer',)
+    readonly_fields=('cart',)
+
+    class Media:
+        from django.conf import settings
+        static_url = getattr(settings, 'STATIC_URL', '/static/')
+        js = [ static_url+'/js/jquery-1.8.2.min.js', static_url+'/js/cart-link.js', ]
+
+admin.site.register(Client, ClientsAdmin)
+
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'comment', 'ordered_at', 'is_moderate')
+
+admin.site.register(Comment, CommentsAdmin)
+
+class CartProductinline(admin.TabularInline):
+    model = CartProduct
+
+class CartItemAdmin(admin.ModelAdmin):
+    inlines = [CartProductinline]
+    exclude = ('cart_id',)
+    model = ProductPhoto
+
+admin.site.register(CartItem, CartItemAdmin)

@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% block main %}
     <div class="cartComplete txt11 opacityBlock">
+    {% if cart_items %}
         {% if is_order %}
             Спасибо за заказ, в ближайшее время мы с вами свяжемся.
         {% else %}
@@ -21,7 +22,7 @@
 
                 <div class="fieldHead"><span>Подтверждение заказа</span></div>
                 {% for item in cart_items %}
-                    <div class="cartConfirm">
+                    <div class="cartConfirm cartitem">
                     <a class="opacity" href="{{ item.product.get_absolute_url }}" target="_blank">
                         {% thumbnail item.product.productphoto_set.all.0.image "80x80" as im %}
                             <span class="cc1"><img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"></span>
@@ -53,19 +54,19 @@
                 <div class="fieldHead"><span>Способ доставки</span></div>
                 <div class="radioSelect">
                     <p>
-                        <span class="niceRadio radioChecked">{{ form.delivery.0 }}></span>
+                        {{ form.delivery.0 }}
                         <span>Доставка в приделах МКАД</span>
                         <b>0 руб.</b>
                     </p>
 
                     <p>
-                        <span class="niceRadio">{{ form.delivery.1 }}</span>
+                        {{ form.delivery.1 }}
                         <span>За МКАД и Подмосковье<br>при сумме заказа менее 5 000 руб.</span>
                         <b>300 руб.</b>
                     </p>
 
                     <p>
-                        <span class="niceRadio">{{ form.delivery.2 }}</span>
+                        {{ form.delivery.2 }}
                         <span>Доставка по России<br>первым классом</span>
                         <b>Расчитывается индивидуально</b>
                     </p>
@@ -74,9 +75,12 @@
                 <p><b>Внимание!</b> При курьерской доставке заказа по Москве, в случае отказа от покупки, по причинам не связаным с качеством товара, Вам необходимо оплатить 300 рублей за курьерские услуги.</p>
 
                 <div class="fieldHead"><span>Вы можете оставить комментарий к своему заказу</span></div>
-                <textarea class="textarea" name="message"></textarea>
+                {{ form.comment }}
             </div>
         </form>
+    {% endif %}
+        {% else %}
+        Корзина пуста
     {% endif %}
     </div>
 {% endblock %}

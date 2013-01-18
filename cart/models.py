@@ -15,12 +15,15 @@ class CartItem(models.Model):
     class Meta:
         db_table = 'cart_item'
 
+    def __unicode__(self):
+        return u'%s' % self.id
+
 # Механизм
 DELIVERY_CHOICES = (
   (0, u'Москва'),
   (1, u'Подмосковье'),
   (2, u'Россия'),
-  (2, u'Не указано'),
+  (3, u'Не указано'),
 )
 
 class Client(models.Model):
@@ -33,10 +36,11 @@ class Client(models.Model):
     referrer = models.URLField(null=True, blank=True, verify_exists=False, max_length=500)
     cart = models.ForeignKey(CartItem)
     subtotal = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=2, verbose_name=u'Сумма')
-    ordered_at = models.DateTimeField(auto_now_add=True )
+    ordered_at = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата заказа')
 
     class Meta:
         ordering = ['-ordered_at']
+        verbose_name_plural = u'Клиенты'
 
     def __unicode__(self):
         return self.name

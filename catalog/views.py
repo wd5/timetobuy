@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
-from catalog.models import Section, Category, Clock, BrandsCategory
+from catalog.models import Section, Category, Clock, BrandsCategory, Comment, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from django.db.models.query_utils import Q
+from django.http import HttpResponse
+from cart.models import CartItem
+from cart import cart
+from math import sqrt
+import json
 
 def main(request):
     return render(request, 'main.html', locals())
 
-def section(request, slug):
+def section(request, slug=None):
     path = request.path.split('/')[1]
     params = request.GET.dict()
     page = 1
@@ -14,8 +20,15 @@ def section(request, slug):
         page = request.GET.get('page')
         params.pop('page')
     if path == 'section':
-        section = Section.objects.get(slug=slug)
-        clocks = Clock.objects.filter(category__section=section)
+        if slug:
+            section = Section.objects.get(slug=slug)
+            clocks = Clock.objects.filter(category__section=section)
+        else:
+            search_world = request.GET.get('search_name')
+            clocks = Clock.objects.filter(Q(name__icontains=search_world) | Q(article__icontains=search_world) | Q(brand__name__icontains=search_world))
+            params.pop('search_name')
+            params.pop('x')
+            params.pop('y')
     elif path == 'category':
         section = Category.objects.get(slug=slug)
         clocks = Clock.objects.filter(category=section)
@@ -190,12 +203,39 @@ def section(request, slug):
         clocks = paginator.page(paginator.num_pages)
     return render(request, 'catalog.html', locals())
 
+def wilson_score(sum_rating, n, votes_range = [0, 5]):
+    z = 1.64485
+    v_min = min(votes_range)
+    v_width = float(max(votes_range) - v_min)
+    phat = (sum_rating - n * v_min) / v_width / float(n)
+    rating = (phat+z*z/(2*n)-z*sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
+    return rating * v_width + v_min
+
 def clock(request, slug):
     clock = Clock.objects.get(slug=slug)
+    random_clocks = Clock.objects.all().order_by('?')[:3]
+    comments = clock.comment_set.filter(is_moderate=True)
+    sum_rating = 0
+    n = comments.count()
+    for i in comments:
+        sum_rating += i.rating
     features = []
     for field in clock._meta.get_fields_with_model():
         value = clock.__getattribute__(field[0].name)
         for item in field[0].choices:
             if item[0] == value:
                 features.append({field[0].verbose_name : item[1]})
+    if sum_rating:
+        sum_rating = int(wilson_score(sum_rating=sum_rating, n=n))
     return render(request, 'clock.html', locals())
+
+def post_comment(request):
+    product = Product.objects.get(slug=request.POST.get('product'))
+    cartitem = CartItem.objects.get(cart_id=cart._cart_id(request))
+    if Comment.objects.filter(cart=cartitem):
+        results = {'result':False}
+    else:
+        Comment(product=product, name=request.POST.get('name'), comment=request.POST.get('message'), rating=int(request.POST.get('check')), cart=cartitem).save()
+        results = {'result':True}
+    response = json.dumps(results)
+    return HttpResponse(response, mimetype= "application/json")

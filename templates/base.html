@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load catalog_filters %}
+{% load cart_filters %}
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
@@ -37,6 +38,7 @@
                 'transitionIn'      : 'none',
                 'transitionOut'     : 'none'
             });
+
 
             $("a[rel=example_group]").fancybox({
                 'transitionIn'      : 'none',
@@ -204,12 +206,7 @@
             <div class="number left">8 <span class="blue">(499)</span> <!--noskype></noskype-->662-87-99</div>
         </div>
 
-        <div class="cart right opacityBlock">
-            <a class="noDecoration blue txt11" id="various2" href="#inline2">
-                <span class="cartPic white">12</span>
-                <span class="cartTxt"><b class=" txt10">Корзина: </b>55&thinsp;000&thinsp;руб.</span>
-            </a>
-        </div>
+        {% cart_box request %}
 
         <div class="help right txt10 opacityBlock black noDecoration">
             <a href="">Оплата</a>
@@ -229,8 +226,8 @@
             {% menu request %}
         </ul>
         <div class="search lightGrey right">
-            <form action="#" class="searchForm">
-                <input id="search" type="text" name="filter_name" value="Найти часы..." onclick="this.value = '';" onkeydown="this.style.color = '#000000';">
+            <form action="/section/" method="GET" class="searchForm">
+                <input id="search" type="text" name="search_name" placeholder="Найти часы...">
                 <input id="button" type="image" src="{{ STATIC_URL }}img/search.jpg">
             </form>
         </div>

@@ -45,7 +45,7 @@
             </li>
             <li>
                 <span class="left sku"><b class="txt10 dBlock left">Артикул:</b><br><b class="blue">AX1458745</b></span>
-                <div class="left itemstar"><b class="txt10 dBlock left">Оценка:</b><br><b class="stars str5"></b></div>
+                <div class="left itemstar"><b class="txt10 dBlock left">Оценка:</b><br><b class="stars str{{ sum_rating }}"></b></div>
             </li>
             <li class="buyButton opacityBlock">
                 <span class="stock txt10 blue">Есть в наличии<br><b>(в связи с задержкой обновления, наличие утояняйте у менеджера)</b></span>
@@ -98,9 +98,14 @@
 
         <ul class="recomended noList opacityBlock left">
             <li class="first"><img src="{{ STATIC_URL }}img/yourLike.jpg"></li>
-            <li><a href="#"><img align="center" height="150" src="{{ STATIC_URL }}img/photo-m.jpg"></a></li>
-            <li><a href="#"><img align="center" height="150" src="{{ STATIC_URL }}img/photo-m.jpg"></a></li>
-            <li><a href="#"><img align="center" height="150" src="{{ STATIC_URL }}img/photo-m.jpg"></a></li>
+            {% for random in random_clocks %}
+                <li><a href="{{ random.get_absolute_url }}">
+                    {% thumbnail random.productphoto_set.all.0 "150x150" as im %}
+                        <img align="center" height="{{ im.y }}" width="{{ im.x }}" src="{{ im.url }}">
+                    {% endthumbnail %}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 
@@ -139,39 +144,16 @@
             </div>
         </dd>
         
-        <dt class="txt10">Отзывы (4)</dt>
+        <dt class="txt10">Отзывы ({{ comments.count }})</dt>
         <dd>
             <div class="tab-content">
+                {% for comment in comments %}
                 <div class="marginB20">
-                    Автор: <b>Ромарио</b>
-                    <span class="dBlock"><b class="stars str1"></b></span>
-                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
+                    Автор: <b>{{ comment.name }}</b>
+                    <span class="dBlock"><b class="stars str{{ comment.rating }}"></b></span>
+                    {{ comment.comment }}
                 </div>
-                <div class="marginB20">
-                    Автор: <b>Ромарио</b>
-                    <span class="dBlock"><b class="stars str2"></b></span>
-                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
-                </div>
-                <div class="marginB20">
-                    Автор: <b>Ромарио</b>
-                    <span class="dBlock"><b class="stars str3"></b></span>
-                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
-                </div>
-                <div class="marginB20">
-                    Автор: <b>Ромарио</b>
-                    <span class="dBlock"><b class="stars str4"></b></span>
-                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
-                </div>
-                <div class="marginB20">
-                    Автор: <b>Ромарио</b>
-                    <span class="dBlock"><b class="stars str5"></b></span>
-                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
-                </div>
-                <div class="marginB20">
-                    Автор: <b>Ромарио</b>
-                    <span class="dBlock"><b class="stars"></b></span>
-                    Великолепный 100 метровый EcoDrive на ремне и в черном цвете. Охотился за этой моделью месяца три (цена не проходила в мой бюджет) и к счастью вышел на "Мир Часов". Получил скидку и часы теперь на моей руке, спасибо всему коллективу! Мечты сбываются!(с)
-                </div>
+                {% endfor %}
                 <span class="dBlock"><a class="opacity" id="various22" href="#inline22"><img src="{{ STATIC_URL }}img/rewiew.png"></a></span>
             </div>
         </dd>
@@ -191,34 +173,37 @@
 
     <div style="display: none;">
         <div id="inline22" style="width:475px;height:380px;overflow:auto;">              
-            <form id="form2" class="blocks" action="#" method="post">
+            <form id="feedback-form" data-url="{% url post-comment %}" class="blocks" action="#" method="post">
                 <b class="dBlock marginB10"><br>Оставить отзыв о товаре</b>
-                <input type="text" class="textInput" name="name" value="Ваше имя*" onclick="this.value = '';"/>
+                <p class="comment-name-error hide">Поле обязательно для заполнения</p>
+                <input type="text" class="textInput comment-name" name="name" placeholder="Ваше имя*"/>
+                <input type="hidden" name="product" value="{{ clock.slug }}" />
 
                 <div class="addRew">
                     <p class="left marginR20">
-                        <input class="niceRadio" type="radio" name="check1" />
+                        <input class="niceRadio" type="radio" name="check" value="1" />
                         <span>1</span>
                     </p>
                     <p class="left marginR20">
-                        <input class="niceRadio" type="radio" name="check1" />
+                        <input class="niceRadio" type="radio" name="check" value="2" />
                         <span>2</span>
                     </p>
                     <p class="left marginR20">
-                        <input class="niceRadio" type="radio" name="check1" />
+                        <input class="niceRadio" type="radio" name="check" value="3"/>
                         <span>3</span>
                     </p>
                     <p class="left marginR20">
-                        <input class="niceRadio" type="radio" name="check1" />
+                        <input class="niceRadio" type="radio" name="check" value="4"/>
                         <span>4</span>
                     </p>
                     <p class="left marginR20">
-                        <input class="niceRadio" type="radio" name="check1" checked="checked" />
+                        <input class="niceRadio" type="radio" name="check" value="5" checked="checked" />
                         <span>5</span>
                     </p>
                 </div>
 
-                <textarea class="textarea" name="message"></textarea>
+                <p class="comment-message-error hide">Поле обязательно для заполнения</p>
+                <textarea class="textarea comment-message" name="message"></textarea>
                 <input class="opacity" type="image" src="{{ STATIC_URL }}img/sendButtom.jpg">
             </form>
         </div>

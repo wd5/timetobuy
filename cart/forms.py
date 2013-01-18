@@ -8,6 +8,8 @@ class OrderForm(forms.ModelForm):
     email = forms.EmailField(max_length=255, required=True, widget=forms.TextInput( attrs={u'placeholder': u'Email*', u'class': u'textInput',}))
     address = forms.CharField(max_length=255, required=False, widget=forms.TextInput( attrs={u'placeholder': u'Адрес', u'class': u'textInput',}))
     delivery = forms.ChoiceField(required=False, choices=DELIVERY_CHOICES, widget=forms.RadioSelect)
+    comment = forms.CharField(required=False, widget=forms.Textarea(attrs={u'class': u'textarea'}))
+
     class Meta:
         model = Client
         exclude = ('cart',)
